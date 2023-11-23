@@ -21,6 +21,10 @@ const routes = createBrowserRouter([
             {
                 path: '/is',
                 element: <h3>This is about dfhfgtjutrfyhre page</h3>
+            },
+            {
+                path: '/isis',
+                element: <h3>dfhykyukytut dfhfgtjutrfyhre page</h3>
             }
         ]
     }
