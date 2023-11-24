@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HomeCompOne = () => {
+const PrivetRoot = () => {
     return (
         <div>
 
@@ -8,4 +8,4 @@ const HomeCompOne = () => {
     );
 };
 
-export default HomeCompOne;
+export default PrivetRoot;
