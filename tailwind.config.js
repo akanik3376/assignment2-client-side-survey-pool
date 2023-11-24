@@ -1,36 +1,20 @@
+/** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
-  },
-  daisyui: {
-    themes: [
-      {
-        mytheme: {
-
-          "primary": "#029E9D",
-
-          "secondary": "#FDC703",
-
-          "accent": "#263A49",
-
-          "neutral": "#777777",
-
-          "base-100": "#FFFFFF",
-
-          "info": "#17233e",
-
-          "success": "#029E9D",
-
-          "warning": "#27334C",
-
-          "error": "#F32B42",
-        },
+    extend: {
+      colors: {
+        "dark-01": "#0e1133",
+        "dark-02": "#505056",
+        "dark-03": "#79C23F",
       },
-    ],
+      fontFamily: {
+        inter: ["Inter", "sans"], // 'inter' is a custom name for the Inter font
+      },
+    },
   },
   plugins: [require("daisyui")],
-}
+  daisyui: {
+    themes: ["light"],
+  },
+};

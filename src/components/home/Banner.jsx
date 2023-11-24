@@ -7,7 +7,7 @@ const Banner = () => {
             <div className="hero-overlay bg-opacity-60"></div>
             <div className="hero-content text-center text-neutral-content">
                 <div className="w-3/4">
-                    <h1 className="mb-5 text-5xl font-bold"> Welcome to our Advanced Polling and Survey Platform</h1>
+                    <h1 className="mb-5 text-2xl md:text-5xl font-bold"> Welcome to our Advanced Polling and Survey Platform</h1>
                     <p className="mb-5">Empower your decision-making process with our cutting-edge Polling and Survey App! Unleash the potential of the MERN stack - MongoDB, Express.js, React.js, Node.js - as we redefine user engagement.</p>
                     <button className="btn btn-primary">Explore More</button>
                 </div>

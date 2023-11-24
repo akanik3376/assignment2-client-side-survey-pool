@@ -1,7 +1,7 @@
 [
     {
         "id": 1,
-        "avatar": "path/to/avatar1.jpg",
+        "avatar": "https://i.ibb.co/vzhJV5T/businessman-working-laptop-computer-office-3d-character-isolated-white-background-40876-3756.jpg",
         "testimonial": "The Polling and Survey app from [Your Company] is fantastic! It's user-friendly, and the MERN stack ensures a seamless experience. Thumbs up!",
         "customer": {
             "name": "Alice Johnson",
@@ -11,7 +11,7 @@
     },
     {
         "id": 2,
-        "avatar": "path/to/avatar2.jpg",
+        "avatar": "https://i.ibb.co/3FY6qLZ/farmer-using-agricultural-technology-53876-120543.jpg",
         "testimonial": "I love using [Your Company]'s Polling and Survey app. The UI/UX with React.js is brilliant, and the surveys are easy to create and participate in. Highly recommended!",
         "customer": {
             "name": "Bob Smith",
@@ -21,7 +21,7 @@
     },
     {
         "id": 3,
-        "avatar": "path/to/avatar3.jpg",
+        "avatar": "https://i.ibb.co/8xJczgv/download.png",
         "testimonial": "Thumbs up to [Your Company] for creating an intuitive Polling and Survey app. The use of Node.js in the backend ensures a smooth and responsive platform.",
         "customer": {
             "name": "Catherine Williams",
@@ -31,7 +31,7 @@
     },
     {
         "id": 4,
-        "avatar": "path/to/avatar4.jpg",
+        "avatar": "https://i.ibb.co/ZhDHsB3/young-man-cartoon-MRPM90.jpg",
         "testimonial": "The Polling and Survey app by [Your Company] is a game-changer. The flexibility and features provided by MongoDB make it my go-to platform for surveys.",
         "customer": {
             "name": "David Turner",
@@ -41,7 +41,7 @@
     },
     {
         "id": 5,
-        "avatar": "path/to/avatar5.jpg",
+        "avatar": "https://i.ibb.co/KyHGwvh/young-man-cartoon-vector-17299132.jpg",
         "testimonial": "Kudos to [Your Company] for the Polling and Survey app. It's user-friendly, and the use of Express.js for a robust backend is impressive. Great job!",
         "customer": {
             "name": "Emily Davis",
@@ -51,52 +51,12 @@
     },
     {
         "id": 6,
-        "avatar": "path/to/avatar6.jpg",
+        "avatar": "https://i.ibb.co/WPNNpnT/296dcdbd03d450dfda7ffc92232b08b8.jpg",
         "testimonial": "The Polling and Survey app surpassed my expectations. [Your Company] did an excellent job, and the use of React.js for the frontend is remarkable.",
         "customer": {
             "name": "Frank Miller",
             "position": "Loyal User"
         },
         "timestamp": "2023-07-10T09:30:00Z"
-    },
-    {
-        "id": 7,
-        "avatar": "path/to/avatar7.jpg",
-        "testimonial": "I'm impressed with [Your Company]'s Polling and Survey app. The interface is clean, and the integration of MongoDB and Node.js makes it a powerful tool.",
-        "customer": {
-            "name": "Grace Turner",
-            "position": "Tech User"
-        },
-        "timestamp": "2023-07-15T14:00:00Z"
-    },
-    {
-        "id": 8,
-        "avatar": "path/to/avatar8.jpg",
-        "testimonial": "I appreciate [Your Company]'s dedication to creating a user-friendly Polling and Survey app. The use of React.js for the frontend is a game-changer.",
-        "customer": {
-            "name": "Henry Walker",
-            "position": "App User"
-        },
-        "timestamp": "2023-07-20T16:45:00Z"
-    },
-    {
-        "id": 9,
-        "avatar": "path/to/avatar9.jpg",
-        "testimonial": "The Polling and Survey app by [Your Company] is simply amazing. The features provided by MongoDB and Express.js make it a standout platform.",
-        "customer": {
-            "name": "Isabel Garcia",
-            "position": "Survey Enthusiast"
-        },
-        "timestamp": "2023-07-25T11:15:00Z"
-    },
-    {
-        "id": 10,
-        "avatar": "path/to/avatar10.jpg",
-        "testimonial": "I'm a fan of [Your Company]'s Polling and Survey app. The integration of the MERN stack ensures a smooth and efficient user experience.",
-        "customer": {
-            "name": "Jack Thompson",
-            "position": "Feedback Lover"
-        },
-        "timestamp": "2023-07-30T17:30:00Z"
     }
 ]
