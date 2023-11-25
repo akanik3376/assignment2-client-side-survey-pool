@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from '../Share/Container';
 import { FcGoogle } from 'react-icons/fc'
 
 import registerImg from '../assets/login/sign-concept-illustration_114360-125.avif'
 import { Link } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth';
+import { IoEyeSharp } from 'react-icons/io5';
 
 const Register = () => {
-
+    const [isShow, setIsShow] = useState(false)
     const { createUser } = useAuth()
 
     const HandelSubmit = e => {
@@ -84,6 +85,7 @@ const Register = () => {
                                         data-temp-mail-org='0'
                                     />
                                 </div>
+
                                 <div>
                                     <div className='flex justify-between'>
                                         <label htmlFor='password' className='text-sm mb-2'>
@@ -91,14 +93,17 @@ const Register = () => {
                                         </label>
                                     </div>
                                     <input
-                                        type='password'
+                                        type={isShow ? 'text' : 'password'}
                                         name='password'
-                                        autoComplete='new-password'
+                                        autoComplete='current-password'
                                         id='password'
                                         required
                                         placeholder='*******'
-                                        className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
+                                        className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900 relative'
+
                                     />
+                                    <IoEyeSharp onClick={() => setIsShow(!isShow)}
+                                        className='-mt-7 ml-60 absolute text-gray-600 '></IoEyeSharp>
                                 </div>
                             </div>
 

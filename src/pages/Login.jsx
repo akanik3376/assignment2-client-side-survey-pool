@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from '../Share/Container';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc'
+import { FaEyeSlash } from 'react-icons/fa'
+import { IoEyeSharp } from "react-icons/io5";
 import loginImg from '../assets/login/access-control-system-abstract-concept_335657-3180.avif'
 import useAuth from '../Hooks/useAuth';
 
 const Login = () => {
 
-    const { } = useAuth()
+    const [isShow, setIsShow] = useState(false)
+    const { googleLogin, LoginUser } = useAuth()
 
+    // login with google
+    const HandelGoogleLogin = () => {
+        googleLogin()
+            .then(res => {
+                if (res) {
+                    Swal.fire("User login success fully");
+                }
+            })
+            .catch(err => console.log(err))
+    }
+
+    // login with email and password
     const HandelSubmit = (e) => {
         e.preventDefault()
         const email = e.target.email.value
@@ -64,6 +79,7 @@ const Login = () => {
                                         data-temp-mail-org='0'
                                     />
                                 </div>
+
                                 <div>
                                     <div className='flex justify-between'>
                                         <label htmlFor='password' className='text-sm mb-2'>
@@ -71,16 +87,22 @@ const Login = () => {
                                         </label>
                                     </div>
                                     <input
-                                        type='password'
+                                        type={isShow ? 'text' : 'password'}
                                         name='password'
                                         autoComplete='current-password'
                                         id='password'
                                         required
                                         placeholder='*******'
-                                        className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
+                                        className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900 relative'
+
                                     />
+                                    <IoEyeSharp onClick={() => setIsShow(!isShow)}
+                                        className='-mt-7 ml-60 absolute text-gray-600 '></IoEyeSharp>
                                 </div>
+
+
                             </div>
+
 
                             <div>
                                 <button
@@ -103,7 +125,8 @@ const Login = () => {
                             </p>
                             <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
                         </div>
-                        <div className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
+                        <div onClick={HandelGoogleLogin}
+                            className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'>
                             <FcGoogle size={32} />
 
                             <p>Continue with Google</p>
