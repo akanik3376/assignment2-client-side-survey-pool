@@ -4,13 +4,15 @@ import ErrorPage from '../pages/ErrorPage';
 import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
-import Survey from '../pages/Survey';
 import ContactUs from '../pages/ContactUs';
 import Service from '../pages/Service';
 import AboutUs from '../pages/AboutUs';
 import Dashboard from '../pages/DashBoard/Dashboard';
 import AdminHome from '../pages/DashBoard/AdminHome/AdminHome';
 import ManageUsers from '../pages/DashBoard/ManageUsers/ManageUsers';
+import SurveyHome from '../pages/DashBoard/Survey/SurveyHome';
+import AddSurvey from '../pages/DashBoard/Survey/AddSurvey';
+import Survey from '../pages/Survey';
 
 
 const routes = createBrowserRouter([
@@ -83,6 +85,15 @@ const routes = createBrowserRouter([
                 element: <ManageUsers />
             },
 
+            // Survey role
+            {
+                path: 'survey-home',
+                element: <SurveyHome />
+            },
+            {
+                path: 'add-survey',
+                element: <AddSurvey />
+            },
         ]
     }
 ])

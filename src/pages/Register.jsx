@@ -24,7 +24,7 @@ const Register = () => {
                 }
             })
             .catch(err => console.log(err))
-        // console.log(email)
+
     }
 
     return (

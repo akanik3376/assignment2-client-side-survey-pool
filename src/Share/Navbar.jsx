@@ -1,5 +1,5 @@
 import Container from "./Container";
-import avatar from '../assets/images/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.avif';
+// import avatar from '../assets/images/isolated-young-handsome-man-different-poses-white-background-illustration_632498-859.avif';
 import Logo from '../assets/logo/survey.svg';
 import useAuth from "../Hooks/useAuth";
 import { Link, NavLink } from "react-router-dom";

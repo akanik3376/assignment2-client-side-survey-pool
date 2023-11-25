@@ -1,5 +1,5 @@
 import React from 'react';
-import errorImage from '../assets/images/night-sky-full-twinkling-stars_1048-14690.avif'
+import errorImage from '../assets/images/cute-background-fairy-using-her-wand_23-2147579142.jpg'
 import Container from '../Share/Container';
 import { Link } from 'react-router-dom';
 

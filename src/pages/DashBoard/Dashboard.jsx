@@ -6,12 +6,13 @@ import { IoMdContact, IoMdMenu } from "react-icons/io";
 
 const Dashboard = () => {
     //TO DO:
-    const isAdmin = true
+    const isAdmin = false
+    const isSurvey = true
 
     return (
         <div className="flex gap-12 ">
             {/* side bar */}
-            <div className="w-64 bg-yellow-500 min-h-screen">
+            <div className="w-64 bg-[#FF00001A] min-h-screen">
                 <ul className="menu uppercase font-bold flex flex-col   space-y-2  mt-9">
                     {
                         isAdmin ? <>
@@ -27,31 +28,20 @@ const Dashboard = () => {
 
 
                         </>
-                            : <>
+                            :
+                            <>
 
                                 {/* main menu clint side */}
 
                                 <li>
-                                    <NavLink to='/user-home'><FaHome />User Home</NavLink>
+                                    <NavLink to='/dashboard/survey-home'><FaHome />Survey Home</NavLink>
                                 </li>
 
                                 <li>
-                                    <NavLink to='/about-us'><FaBookDead />About Us</NavLink>
+                                    <NavLink to='/dashboard/add-survey'><FaBookDead />Add Survey</NavLink>
                                 </li>
 
-                                <li>
-                                    <NavLink to='/dashboard/payment-history'><FaLock />payment history</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to='/dashboard/cart'><IoMdMenu />My cart {cart?.length}</NavLink>
-                                </li>
-                                <li>
-                                    <NavLink to='/user-add-review'><FaLock />add review</NavLink>
-                                </li>
 
-                                <li>
-                                    <NavLink to='/user-booking'><MdContactMail />my booking</NavLink>
-                                </li>
 
                             </>
                     }
