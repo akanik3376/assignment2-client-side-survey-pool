@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaLongArrowAltRight } from "react-icons/fa";
 
 const Form = () => {
     return (
@@ -25,7 +26,7 @@ const Form = () => {
                 </div>
 
                 <div className="form-control mt-6">
-                    <button className="btn border-b-4 hover:text-white font-semibold hover:bg-[#f78da7] border-[#f78da7]">Get in touch</button>
+                    <button className="btn border-b-4 hover:text-white font-semibold hover:bg-[#f78da7] border-b-[#f78da7] ">Get in touch <FaLongArrowAltRight className='text-2xl'></FaLongArrowAltRight></button>
                 </div>
             </form>
         </div>

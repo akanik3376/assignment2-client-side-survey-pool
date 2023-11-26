@@ -14,6 +14,8 @@ const CreateSurvey = () => {
         const form = event.target;
 
         const createSurvey = {
+            name: user?.displayName,
+            image: user?.photoURL,
             email: form.email.value,
             surveyTitle: form.surveyTitle.value,
             category: form.category.value,

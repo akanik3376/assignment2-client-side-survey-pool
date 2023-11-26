@@ -13,6 +13,7 @@ import ManageUsers from '../pages/DashBoard/ManageUsers/ManageUsers';
 import SurveyHome from '../pages/DashBoard/Survey/SurveyHome';
 import AddSurvey from '../pages/DashBoard/Survey/AddSurvey';
 import Survey from '../pages/Survey';
+import SurveyDetails from '../pages/SurveyDetails';
 
 
 const routes = createBrowserRouter([
@@ -28,6 +29,11 @@ const routes = createBrowserRouter([
             {
                 path: '/survey',
                 element: <Survey />
+            },
+            {
+                path: '/survey/details/:id',
+                element: <SurveyDetails />,
+                loader: ({ params }) => fetch(`http://localhost:5000/api/v1/survey/${params.id}`)
             },
             {
                 path: '/about-us',
