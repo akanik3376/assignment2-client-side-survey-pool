@@ -6,6 +6,7 @@ import registerImg from '../assets/login/sign-concept-illustration_114360-125.av
 import { Link } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth';
 import { IoEyeSharp } from 'react-icons/io5';
+import Swal from 'sweetalert2';
 
 const Register = () => {
     const [isShow, setIsShow] = useState(false)

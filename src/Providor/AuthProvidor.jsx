@@ -49,7 +49,11 @@ const AuthProvider = ({ children }) => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser)
             if (currentUser) {
-                const userInfo = { email: currentUser.email }
+                const userInfo = {
+                    email: currentUser.email,
+                    name: currentUser.email,
+                    role: "user",
+                }
 
                 axiosPublic.post('/users', userInfo)
                     .then(res => {

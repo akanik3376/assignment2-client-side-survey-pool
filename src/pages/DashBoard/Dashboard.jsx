@@ -1,50 +1,57 @@
-import { NavLink, Outlet } from "react-router-dom";
-import { FaHome, FaLock, FaFileContract, FaUser, FaBookDead } from "react-icons/fa";
-import { MdContactMail } from "react-icons/md";
-import { IoMdContact, IoMdMenu } from "react-icons/io";
+import { NavLink, Outlet, useLoaderData } from "react-router-dom";
+import { FaHome, FaFileContract, FaUser, FaBookDead } from "react-icons/fa";
+import { IoMdContact } from "react-icons/io";
 
 
 const Dashboard = () => {
+    const item = useLoaderData()
     //TO DO:
-    const isAdmin = false
-    const isSurvey = true
+    const isAdmin = true
+    const isSurvey = false
 
     return (
-        <div className="flex gap-12 ">
+        <div className="flex gap-12 p-8">
             {/* side bar */}
             <div className="w-64 bg-[#FF00001A] min-h-screen">
                 <ul className="menu uppercase font-bold flex flex-col   space-y-2  mt-9">
-                    {
-                        isAdmin ? <>
-
-                            <li>
-                                <NavLink to='/dashboard/admin-home'><FaHome />Admin Home</NavLink>
-                            </li>
-                            <li>
-                                <NavLink to='/dashboard/manage-users'><FaUser />
-                                    Manage User</NavLink>
-                            </li>
 
 
 
-                        </>
-                            :
-                            <>
-
-                                {/* main menu clint side */}
-
-                                <li>
-                                    <NavLink to='/dashboard/survey-home'><FaHome />Survey Home</NavLink>
-                                </li>
-
-                                <li>
-                                    <NavLink to='/dashboard/add-survey'><FaBookDead />Add Survey</NavLink>
-                                </li>
+                    <li>
+                        <NavLink to='/dashboard/admin-home'><FaHome />Admin Home</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/dashboard/manage-users'><FaUser />
+                            Manage User</NavLink>
+                    </li>
 
 
 
-                            </>
-                    }
+                    <h1>survey</h1>
+
+                    {/* main menu clint side */}
+
+                    <li>
+                        <NavLink to='/dashboard/survey-home'><FaHome />Survey Home</NavLink>
+                    </li>
+
+                    <li>
+                        <NavLink to='/dashboard/add-survey'><FaBookDead />Add Survey</NavLink>
+                    </li>
+                    {/* <li>
+                        <NavLink to={`/dashboard/survey/update`}><FaBookDead />Update Survey</NavLink>
+                    </li> */}
+                    <li>
+                        <NavLink to={`/dashboard/feedback`}><FaBookDead />all feedback</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to={`/dashboard/feedback`}><FaBookDead />Survey responses</NavLink>
+                    </li>
+
+
+
+
+
 
                     <hr className="my-5 mx-5 border" />
 
@@ -69,7 +76,7 @@ const Dashboard = () => {
             <div className="flex-1">
                 <Outlet></Outlet>
             </div>
-        </div>
+        </div >
     );
 };
 

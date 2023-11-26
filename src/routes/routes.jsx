@@ -5,7 +5,7 @@ import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import ContactUs from '../pages/ContactUs';
-import Service from '../pages/Service';
+// import Service from '../pages/Service';
 import AboutUs from '../pages/AboutUs';
 import Dashboard from '../pages/DashBoard/Dashboard';
 import AdminHome from '../pages/DashBoard/AdminHome/AdminHome';
@@ -14,6 +14,8 @@ import SurveyHome from '../pages/DashBoard/Survey/SurveyHome';
 import AddSurvey from '../pages/DashBoard/Survey/AddSurvey';
 import Survey from '../pages/Survey';
 import SurveyDetails from '../pages/SurveyDetails';
+import Update from '../components/SurveyCart/Update';
+import GetPro from '../pages/GetPro/GetPro';
 
 
 const routes = createBrowserRouter([
@@ -35,6 +37,7 @@ const routes = createBrowserRouter([
                 element: <SurveyDetails />,
                 loader: ({ params }) => fetch(`http://localhost:5000/api/v1/survey/${params.id}`)
             },
+
             {
                 path: '/about-us',
                 element: <AboutUs />
@@ -43,9 +46,13 @@ const routes = createBrowserRouter([
                 path: '/contact-us',
                 element: <ContactUs />
             },
+            // {
+            //     path: '/terms-service',
+            //     element: <Service />
+            // },
             {
-                path: '/terms-service',
-                element: <Service />
+                path: '/get-pro',
+                element: <GetPro />
             }
         ]
     },
@@ -64,23 +71,9 @@ const routes = createBrowserRouter([
     {
         path: '/dashboard',
         element: <Dashboard></Dashboard>,
+
         errorElement: <ErrorPage />,
         children: [
-            //users roots
-            // {
-            //     path: 'cart',
-            //     element: <Cart></Cart>
-            // },
-            // {
-            //     path: 'pay',
-            //     element: <Payment></Payment>
-            // },
-            // {
-            //     path: 'payment-history',
-            //     element: <PaymentHistory></PaymentHistory>
-            // },
-
-
             // admin roots
             {
                 path: 'admin-home',
@@ -100,8 +93,16 @@ const routes = createBrowserRouter([
                 path: 'add-survey',
                 element: <AddSurvey />
             },
+            {
+                path: 'survey/update/:id',
+                element: <Update />,
+                loader: ({ params }) => fetch(`http://localhost:5000/api/v1/survey/${params.id}`)
+            },
+
+
         ]
-    }
+    },
+
 ])
 
 export default routes;

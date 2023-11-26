@@ -22,15 +22,6 @@ const SurveyCart = ({ item }) => {
 
                     {question1 && <h2 className="text-xl mb-5"><span className='border-b-2 border-black font-bold text-xl'>Question:</span> {question1}</h2>}
 
-
-                    {/* <h2 className="text-xl"><span className='border-b-2 border-black font-bold text-xl'>Question:</span> {question2}</h2>
-
-            <h2 className="text-xl"><span className='border-b-2 border-black font-bold text-xl'>Question:</span> {question3}</h2>
-
-            <h2 className="text-xl"><span className='border-b-2 border-black font-bold text-xl'>Question:</span> {question4}</h2>
-
-            <h2 className="text-xl"><span className='border-b-2 border-black font-bold text-xl'>Question:</span> {question5}</h2> */}
-
                 </div>
             </Link>
 
@@ -45,6 +36,8 @@ const SurveyCart = ({ item }) => {
                     <p>{1}</p>
                 </div>
             </div>
+
+
         </div>
 
     );
