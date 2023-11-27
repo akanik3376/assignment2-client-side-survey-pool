@@ -1,4 +1,3 @@
-import { useState } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
@@ -7,7 +6,6 @@ import Swal from "sweetalert2";
 const CreateSurvey = () => {
     const axiosPublic = useAxiosPublic()
     const { user } = useAuth()
-    const [questionCount, setQuestionCount] = useState(1); // Initial number of questions
 
     const handleCreateSurvey = async (event) => {
         event.preventDefault();
@@ -15,21 +13,21 @@ const CreateSurvey = () => {
 
         const createSurvey = {
             name: user?.displayName,
-            image: user?.photoURL,
+
             email: form.email.value,
             surveyTitle: form.surveyTitle.value,
             category: form.category.value,
             date: form.date.value,
             description: form.description.value,
+            question1: form.question1.value,
+            question2: form.question2.value,
+            question3: form.question3.value,
+            like: form.like.value,
+            disLike: form.disLike.value,
+
         };
 
 
-        for (let i = 1; i <= questionCount; i++) {
-            createSurvey[`question${i}`] = form[`question${i}`].value;
-        }
-
-
-        // console.log(createSurvey);
 
         const res = await axiosPublic.post("/api/v1/survey", createSurvey)
         console.log(res.data);
@@ -77,9 +75,9 @@ const CreateSurvey = () => {
                                     <option value="Education">Education</option>
                                     <option value="Health-Care">Health Care</option>
                                     <option value="Ecommerce">Ecommerce</option>
-                                    <option value="Human-Resources">Human Resources</option>
+                                    {/* <option value="Human-Resources">Human Resources</option>
                                     <option value="Customers">Customers</option>
-                                    <option value="Market-Research">Market Research</option>
+                                    <option value="Market-Research">Market Research</option> */}
                                 </select>
                             </div>
                             <div className="flex-1">
@@ -96,20 +94,62 @@ const CreateSurvey = () => {
                             ></textarea>
                         </div>
 
-                        {[...Array(questionCount)].map((_, index) => (
-                            <div className="my-5 " key={index}>
-                                <p className="text-[2a2a2a] font-bold">Question {index + 1}:</p>
+
+                        <div className="my-5 ">
+                            <p className="text-[2a2a2a] font-bold">Question 1:</p>
+                            <input
+                                className="w-full rounded-sm p-2 outline-none "
+                                name='question1'
+                                placeholder={`Enter your question 1 ?`}
+                            />
+
+
+
+                        </div>
+
+                        <div className="my-5 ">
+                            <p className="text-[2a2a2a] font-bold">Question2:</p>
+                            <input
+                                className="w-full rounded-sm p-2 outline-none "
+                                name='question2'
+                                placeholder={`Enter your question 2 ?`}
+                            />
+
+
+
+                        </div>
+
+                        <div className="my-5 ">
+                            <p className="text-[2a2a2a] font-bold">Question3:</p>
+                            <input
+                                className="w-full rounded-sm p-2 outline-none "
+                                name='question3'
+                                placeholder={`Enter your question 3 ?`}
+                            />
+                        </div>
+
+                        <div className="flex gap-4 justify-between">
+                            <div className="my-5 ">
+                                <p className="text-[2a2a2a] font-bold">Like</p>
                                 <input
                                     className="w-full rounded-sm p-2 outline-none "
-                                    name={`question${index + 1}`}
-                                    placeholder={`Enter your question ${index + 1} ?`}
+                                    name='like'
+
+                                    value={0}
+                                    readOnly
                                 />
-
-
-
                             </div>
-                        ))}
-
+                            <div className="my-5 ">
+                                <p className="text-[2a2a2a] font-bold">Dis Like</p>
+                                <input
+                                    className="w-full rounded-sm p-2 outline-none "
+                                    name='disLike'
+                                    placeholder='0'
+                                    value={0}
+                                    readOnly
+                                />
+                            </div>
+                        </div>
 
 
                         <div className="my-5">

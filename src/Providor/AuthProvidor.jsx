@@ -65,15 +65,17 @@ const AuthProvider = ({ children }) => {
 
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
-                        if (res.data.token) {
-                            localStorage.setItem('access-token', res.data.token)
-                            setIsLoading(false)
-                        }
+                        console.log(res)
+                        // if (res.data.token) {
+                        //     localStorage.setItem('access-token', res.data.token)
+                        //     setIsLoading(false)
+                        // }
+                        setIsLoading(false)
                     })
             }
             else {
-                localStorage.removeItem('access-token')
-                setIsLoading(false)
+                // localStorage.removeItem('access-token')
+
             }
         });
         return () => {

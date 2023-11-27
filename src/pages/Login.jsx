@@ -1,5 +1,5 @@
 import Container from '../Share/Container';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc'
 import { FaEyeSlash } from 'react-icons/fa'
 // import { IoEyeSharp } from "react-icons/io5";
@@ -12,13 +12,15 @@ const Login = () => {
 
     const [isShow, setIsShow] = useState(false)
     const { googleLogin, LoginUser } = useAuth()
-
+    const location = useLocation()
+    const navigate = useNavigate()
     // login with google
     const HandelGoogleLogin = () => {
         googleLogin()
             .then(res => {
                 if (res) {
                     Swal.fire("User login success fully");
+                    navigate(location?.state ? location.state : '/')
                 }
             })
             .catch(err => console.log(err))
@@ -35,6 +37,7 @@ const Login = () => {
             .then(res => {
                 if (res) {
                     Swal.fire("User login success fully");
+                    navigate(location?.state ? location.state : '/')
                 }
             })
             .catch(err => console.log(err))

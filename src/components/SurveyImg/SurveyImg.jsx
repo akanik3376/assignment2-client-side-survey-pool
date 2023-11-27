@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import { useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -16,7 +16,7 @@ const SurveyImg = () => {
         fetch('.././../../public/avarter.json')
             .then(res => res.json())
             .then(data => {
-                console.log(data)
+
                 setTeam(data)
             })
     }, [])

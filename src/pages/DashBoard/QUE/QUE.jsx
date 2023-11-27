@@ -1,29 +1,25 @@
 import { useLoaderData } from "react-router-dom";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import swal from "sweetalert";
+import useAuth from "../../../Hooks/useAuth";
 
 const StartSurvey = () => {
     const axiosPublic = useAxiosPublic()
     const surveyDetails = useLoaderData()
-    // console.log(surveyDetails);
+    const { user } = useAuth()
+    console.log(user);
     const { question1, question2, question3 } = surveyDetails || {}
 
 
     const handleSubmit = async (event) => {
         event.preventDefault()
         const form = event.target
-        // question 
-        const question1 = form.question1.value
-        // const question2 = form.question2.value
-        // const question3 = form.question3.value
-        // const question4 = form.question4.value
-        // const question5 = form.question5.value
+
         // answer
         const answer1 = form.answer1.value
         const answer2 = form.answer2.value
         const answer3 = form.answer3.value
-        // const answer4 = form.answer4.value
-        // const answer5 = form.answer5.value
+
 
         const surveyQNA = {
             question1,
@@ -32,11 +28,11 @@ const StartSurvey = () => {
             answer2,
             question3,
             answer3,
-            // question4,
-            // answer4,
-            // question5,
-            // answer5
+            name: user?.displayName,
+            email: user.email
+
         }
+        console.log(surveyQNA)
         const res = await axiosPublic.post('/user-vote', surveyQNA)
         if (res.data.insertedId) {
             swal('Your answer has been saved')
@@ -46,7 +42,7 @@ const StartSurvey = () => {
     }
 
     return (
-        <div>
+        <div className="mt-5">
 
             {/* Navbar */}
 
@@ -55,9 +51,9 @@ const StartSurvey = () => {
             <form onSubmit={handleSubmit}  >
 
                 {/* question 1 */}
-                <input
-                    className="  text-2xl text-[#2a2a2a] font-bold outline-none" readOnly defaultValue={question1} name="question1" />
-
+                <h2
+                    className="  text-xl text-[#2a2a2a] font-medium outline-none">{question1}
+                </h2>
                 <div className="flex my-2">
                     <label className="mr-3">
                         <input type="radio" value="yes" name="answer1" />
@@ -72,8 +68,9 @@ const StartSurvey = () => {
 
 
                 {/* question 2 */}
-                <input
-                    className="  text-2xl text-[#2a2a2a] font-bold outline-none" readOnly defaultValue={question2} name="question2" />
+                <h2
+                    className="  text-xl text-[#2a2a2a] font-medium outline-none">{question2}
+                </h2>
 
 
                 <div className="flex my-2">
@@ -88,8 +85,9 @@ const StartSurvey = () => {
                 </div>
 
                 {/* question 3 */}
-                <input
-                    className="  text-2xl text-[#2a2a2a] font-bold outline-none" readOnly defaultValue={question3} name="question3" />
+                <h2
+                    className="  text-xl text-[#2a2a2a] font-medium outline-none">{question3}
+                </h2>
 
 
                 <div className="flex my-2">

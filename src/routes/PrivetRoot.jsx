@@ -4,22 +4,24 @@ import useAuth from "../Hooks/useAuth";
 
 const PrivetRoot = ({ children }) => {
 
-    const { loading, user } = useAuth()
+    const { isLoading, user } = useAuth()
     const location = useLocation()
-    console.log(location)
+    // console.log(location)
 
-    if (loading) {
-        return <button className="btn">
-            <span className="loading loading-spinner"></span>
-            loading...
-        </button>
+    if (isLoading) {
+        return <div className="flex justify-center items-center h-[40vh]">
+            <button className="btn">
+                <span className="loading loading-spinner "></span>
+                loading...
+            </button>
+        </div>
     }
 
     if (user) {
         return children
     }
 
-    return <Navigate to='/login' state={{ from: location }} replace></Navigate>
+    return <Navigate to='/login' state={location.pathname} replace></Navigate>
 };
 
 export default PrivetRoot;

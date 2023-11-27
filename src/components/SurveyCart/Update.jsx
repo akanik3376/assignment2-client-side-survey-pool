@@ -22,7 +22,11 @@ const CreateSurvey = () => {
             category: form.category.value,
             date: form.date.value,
             description: form.description.value,
-            question: form.question.value,
+            question1: form.question1.value,
+            question2: form.question2.value,
+            question3: form.question3.value,
+            disLike: form.disLike.value,
+            like: form.like.value,
 
         };
 
@@ -103,10 +107,51 @@ const CreateSurvey = () => {
                             <div className="space-y-2" >
 
                                 <div>
-                                    <p className="text-lg text-[#2a2a2a]" >Question :</p>
-                                    <input className="bg-white w-full p-2 rounded-sm outline-none" type="text" name="question" placeholder="Enter Your Question  ?" required defaultValue={data.question1} />
+                                    <p className="text-lg text-[#2a2a2a]" >Question 1:</p>
+                                    <input className="bg-white w-full p-2 rounded-sm outline-none" type="text" name="question1" placeholder="Enter Your Question  ?" required defaultValue={data.question1} />
                                 </div>
                             </div>
+                            {/* question */}
+                            <div className="space-y-2" >
+
+                                <div>
+                                    <p className="text-lg text-[#2a2a2a]" >Question 2:</p>
+                                    <input className="bg-white w-full p-2 rounded-sm outline-none" type="text" name="question2" placeholder="Enter Your Question  ?" required defaultValue={data.question2} />
+                                </div>
+                            </div>
+                            {/* question */}
+                            <div className="space-y-2" >
+
+                                <div>
+                                    <p className="text-lg text-[#2a2a2a]" >Question 3:</p>
+                                    <input className="bg-white w-full p-2 rounded-sm outline-none" type="text" name="question3" placeholder="Enter Your Question  ?" required defaultValue={data.question3} />
+                                </div>
+                            </div>
+
+                            <div className="flex gap-4 justify-between">
+                                <div className="my-5 ">
+                                    <p className="text-[2a2a2a] font-bold">Like</p>
+                                    <input
+                                        className="w-full rounded-sm p-2 outline-none "
+                                        name='like'
+                                        placeholder='0'
+                                        value={0}
+                                        readOnly
+                                    />
+                                </div>
+                                <div className="my-5 ">
+                                    <p className="text-[2a2a2a] font-bold">Dis Like</p>
+                                    <input
+                                        className="w-full rounded-sm p-2 outline-none "
+                                        name='disLike'
+                                        placeholder='0'
+
+                                        readOnly
+                                        value={0}
+                                    />
+                                </div>
+                            </div>
+
                             <div className="my-5">
                                 <input
                                     className="bg-[#79C23F] w-full rounded-sm p-2 text-white font-simibold text-xl cursor-pointer"

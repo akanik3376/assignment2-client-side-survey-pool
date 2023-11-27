@@ -2,7 +2,7 @@ import Container from '../Share/Container';
 import { FcGoogle } from 'react-icons/fc'
 
 import registerImg from '../assets/login/sign-concept-illustration_114360-125.avif'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth';
 import { IoEyeSharp } from 'react-icons/io5';
 import Swal from 'sweetalert2';
@@ -11,7 +11,8 @@ import { useState } from 'react';
 const Register = () => {
     const [isShow, setIsShow] = useState(false)
     const { createUser } = useAuth()
-
+    const location = useLocation()
+    const navigate = useNavigate()
     const HandelSubmit = e => {
         e.preventDefault()
         const email = e.target.email.value
@@ -22,6 +23,7 @@ const Register = () => {
             .then(res => {
                 if (res) {
                     Swal.fire("User create success fully");
+                    navigate(location?.state ? location.state : '/')
                 }
             })
             .catch(err => console.log(err))
