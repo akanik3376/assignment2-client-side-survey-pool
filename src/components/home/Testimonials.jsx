@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -27,7 +27,7 @@ const Testimonials = () => {
                 <h1 className="text-5xl font-semibold w-2/4 m-4 mt-8  border-b-2 border-dark-03 p-2 mx-auto text-center text-rose-500">Our Testimonials</h1>
                 <div className=''>
                     <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-                        {testimonials?.map(item => <SwiperSlide key={item.id}>
+                        {testimonials?.map(item => <SwiperSlide key={item._id}>
                             <div className='w-full md:w-3/5 mx-auto'>
                                 <div className="mx-auto w-28">
                                     <img className='w-28 rounded-full h-28 object-cover' src={item?.avatar} alt="" />

@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import Container from '../Share/Container';
 import { FcGoogle } from 'react-icons/fc'
 
@@ -7,6 +6,7 @@ import { Link } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth';
 import { IoEyeSharp } from 'react-icons/io5';
 import Swal from 'sweetalert2';
+import { useState } from 'react';
 
 const Register = () => {
     const [isShow, setIsShow] = useState(false)

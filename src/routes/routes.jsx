@@ -16,6 +16,7 @@ import Survey from '../pages/Survey';
 import SurveyDetails from '../pages/SurveyDetails';
 import Update from '../components/SurveyCart/Update';
 import GetPro from '../pages/GetPro/GetPro';
+import PrivetRoot from './PrivetRoot';
 
 
 const routes = createBrowserRouter([
@@ -30,7 +31,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: '/survey',
-                element: <Survey />
+                element: <PrivetRoot><Survey /></PrivetRoot>
             },
             {
                 path: '/survey/details/:id',
@@ -72,7 +73,7 @@ const routes = createBrowserRouter([
         path: '/dashboard',
         element: <Dashboard></Dashboard>,
 
-        errorElement: <ErrorPage />,
+        // errorElement: <ErrorPage />,
         children: [
             // admin roots
             {
@@ -93,14 +94,15 @@ const routes = createBrowserRouter([
                 path: 'add-survey',
                 element: <AddSurvey />
             },
-            {
-                path: 'survey/update/:id',
-                element: <Update />,
-                loader: ({ params }) => fetch(`http://localhost:5000/api/v1/survey/${params.id}`)
-            },
+
 
 
         ]
+    },
+    {
+        path: '/update/:id',
+        element: <Update />,
+        loader: ({ params }) => fetch(`http://localhost:5000/api/v1/survey/${params.id}`)
     },
 
 ])

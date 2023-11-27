@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
 import Container from '../Share/Container';
 import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc'
 import { FaEyeSlash } from 'react-icons/fa'
-import { IoEyeSharp } from "react-icons/io5";
+// import { IoEyeSharp } from "react-icons/io5";
 import loginImg from '../assets/login/access-control-system-abstract-concept_335657-3180.avif'
 import useAuth from '../Hooks/useAuth';
+import Swal from 'sweetalert2';
+import { useState } from 'react';
 
 const Login = () => {
 
@@ -31,11 +32,11 @@ const Login = () => {
 
         // login user
         LoginUser(email, password)
-        then(res => {
-            if (res) {
-                Swal.fire("User login success fully");
-            }
-        })
+            .then(res => {
+                if (res) {
+                    Swal.fire("User login success fully");
+                }
+            })
             .catch(err => console.log(err))
 
     }
@@ -96,8 +97,8 @@ const Login = () => {
                                         className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900 relative'
 
                                     />
-                                    <IoEyeSharp onClick={() => setIsShow(!isShow)}
-                                        className='-mt-7 ml-60 absolute text-gray-600 '></IoEyeSharp>
+                                    <FaEyeSlash onClick={() => setIsShow(!isShow)}
+                                        className='-mt-7 ml-60 absolute text-gray-600 '></FaEyeSlash>
                                 </div>
 
 

@@ -1,8 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
 import { Helmet } from 'react-helmet';
 import useAxiosPublic from '../../../Hooks/useAxiosPublic';
-import { FaUser } from 'react-icons/fa';
 import Swal from 'sweetalert2';
 import { MdDelete } from "react-icons/md";
 import { BiSolidUser } from "react-icons/bi";
@@ -10,21 +8,17 @@ import { BiSolidUser } from "react-icons/bi";
 
 const ManageUsers = () => {
     const axiosPublic = useAxiosPublic()
-
+    // const [user] = useUser()
     const { data: users = [], refetch, isLoading } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             try {
                 const res = await axiosPublic.get('/users');
-                console.log(res.data)
+                // console.log(res.data)
                 return res.data;
             } catch (error) {
                 console.error('Error fetching user data:', error);
-                // if (error) {
-                //     await logoutUser()
-                //     navigate('/login')
-                // }
-                // throw error;
+
             }
         },
     });

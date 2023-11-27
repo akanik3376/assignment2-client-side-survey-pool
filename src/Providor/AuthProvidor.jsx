@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { createContext, useEffect, useState } from "react";
-import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { getAuth } from "firebase/auth";
 import app from '../Confige/firebase.confin'
 import useAxiosPublic from "../Hooks/useAxiosPublic";
@@ -42,6 +42,14 @@ const AuthProvider = ({ children }) => {
         setIsLoading(true)
         return signOut(auth)
     }
+    // update user
+    const updateProfileUser = (name, photo) => {
+        setIsLoading()
+        return updateProfile(auth.currentUser, {
+            displayName: name, photoURL: photo
+        })
+    }
+
 
     // User set and dependency
 
@@ -51,7 +59,7 @@ const AuthProvider = ({ children }) => {
             if (currentUser) {
                 const userInfo = {
                     email: currentUser.email,
-                    name: currentUser.email,
+                    name: currentUser.displayName,
                     role: "user",
                 }
 
@@ -71,7 +79,7 @@ const AuthProvider = ({ children }) => {
         return () => {
             unSubscribe()
         }
-    }, [])
+    }, [axiosPublic])
 
 
     // set value & send value object as a props
@@ -81,7 +89,8 @@ const AuthProvider = ({ children }) => {
         googleLogin,
         createUser,
         LoginUser,
-        logoutUser
+        logoutUser,
+        updateProfileUser
 
     }
 

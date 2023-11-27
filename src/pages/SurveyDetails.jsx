@@ -1,103 +1,105 @@
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useParams } from 'react-router-dom';
 import Container from '../Share/Container';
 import { AiFillDislike, AiFillLike } from 'react-icons/ai';
 import useAuth from '../Hooks/useAuth';
-import { useQuery } from '@tanstack/react-query';
+// import { useQuery } from '@tanstack/react-query';
 import useAxiosPublic from '../Hooks/useAxiosPublic';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 import Comments from '../components/Comments';
+import { useState } from 'react';
+import Swal from 'sweetalert2';
+import StartSurvey from './DashBoard/QUE/QUE';
+import useUser from '../Hooks/useUser';
 
 const SurveyDetails = () => {
+    const [isOpen, setIsOpen] = useState(false)
+    const [open, setOpen] = useState(false)
     const item = useLoaderData()
+    const [users] = useUser()
+    // console.log(item)
     const axiosPublic = useAxiosPublic()
-    const { user } = useAuth()
+    const { user, loading } = useAuth()
+    const { id } = useParams()
 
-    const { data: users = [], refetch, isLoading } = useQuery({
-        queryKey: ['users'],
-        queryFn: async () => {
-            try {
-                const res = await axiosPublic.get('/users');
-                // console.log(res.data)
-                return res.data;
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-                // if (error) {
-                //     await logoutUser()
-                //     navigate('/login')
-                // }
-                // throw error;
-            }
-        },
-    });
+    const [likesCount, setLikesCount] = useState(0);
 
-    const HandelDelete = id => {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                axiosPublic.delete(`/api/v1/survey/${id}`)
-                    .then(res => {
-                        if (res.data.deletedCount > 0) {
-                            refetch()
-                            Swal.fire(
-                                'Deleted!',
-                                `${name}`,
-                                'success'
-                            )
-                        }
-                    })
-            }
-        })
-    }
+    const handleLikeClick = async (id) => {
+        setLikesCount((likesCount) => likesCount + 1);
+        try {
+            const info = {
+                userId: user?.userId, // Assuming you have a userId in your user object
+                userName: user?.displayName,
+                userEmail: user?.email,
+                // item,
+                likesCount
+            };
 
+            // Send the PUT request to update likes count
+            const res = await axiosPublic.put(`/api/v1/survey/${id}`, info);
+
+            // Update the state by directly incrementing the count
+
+            // Log the response data
+            console.log(res.data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    // console.log(likesCount)
     const handleCreateSurvey = async (event) => {
         event.preventDefault();
         const form = event.target;
 
         const createSurvey = {
-            photo: user?.displayName,
+            name: user?.displayName,
             photo: user?.photoURL,
             email: user?.email,
             description: form.description.value,
         };
         const res = await axiosPublic.post('/comments', createSurvey)
-        // console.log(res.data)
+        console.log(res.data)
     };
 
+    const handleReport = async (event) => {
+        event.preventDefault();
+        const form = event.target;
 
-    if (isLoading) {
+        const createSurvey = {
+            name: user?.displayName,
+            photo: user?.photoURL,
+            email: user?.email,
+            description: form.description.value,
+        };
+        const res = await axiosPublic.post('/reports', createSurvey)
+        if (res.data.insertedId) {
+            Swal.fire('report added success fully')
+        }
+    }
+
+
+
+    if (loading) {
         return ('Loading...')
     }
 
     return (
         <div>
             <Container>
-                <div className='bg-slate-500 w-full my-12 md:w-2/3 mx-auto p-5'>
+                <div className='bg-slate-100 w-full my-12 full md:w-2/3 mx-auto p-5'>
 
-                    <div className='flex-col space-y-2 text-white  rounded-md'>
+                    <div className='flex-col space-y-2   rounded-md'>
                         <h2 className="text-xl font-semibold "><span className='mr-2 text-black border-b-2 border-red-500 font-bold text-xl'>Category:</span>
                             {item?.category}</h2>
                         <p><span className='mr-2 text-black border-b-2 border-red-500 font-bold text-xl'>Description:</span> {item?.description}</p>
 
                         <h2 className="text-xl"><span className='mr-2 text-black border-b-2 border-red-500 font-bold text-xl'>Title:</span> {item?.surveyTitle}</h2>
 
-                        {item?.question1 && <>
-                            <h2 className="text-xl mb-8"><span className='mr-2 text-black border-b-2 border-black font-bold text-xl'>Question:</span> {item?.question1} ?</h2>
-
-                        </>}
 
                     </div>
 
 
                     <div className="flex justify-center items-center gap-x-6 text-2xl mt-4">
-                        <div className="flex items-center">
+                        <div onClick={() => handleLikeClick(id)} className="flex items-center">
                             <AiFillLike className='text-red-500'></AiFillLike>
                             <p>{1}</p>
                         </div>
@@ -108,42 +110,59 @@ const SurveyDetails = () => {
                         </div>
                     </div>
 
-                    {/* <div>
-                        {users.map(user => <div key={user._id}>
-                            {user.role === 'admin' &&
-                                <div className='flex justify-around items-center gap-5'>
-                                    <Link to={`/survey/update/${item._id}`}>
-                                        <button
-                                            className="btn border-b-4 hover:text-white font-semibold hover:bg-[#f78da7] border-b-[#f78da7] ">Update</button>
-                                    </Link>
 
 
-                                    <button onClick={() => HandelDelete(item._id)} className='btn border-b-4 border-b-red-500 hover:bg-red-500 btn-outline'>Delete</button>
-                                </div >
-
-                            }
-                        </div>)}
-                    </div> */}
                 </div>
+                <h1 onClick={() => setOpen(!open)} className="mb-12 w-full md:w-2/3 mx-auto text-2xl font-bold ">Click To See All Question Hare</h1>
+                {open && <div className='mb-10 w-full md:w-2/3 mx-auto'>
+                    <h1 className="text-2xl text-center font-semibold">Question</h1>
+                    <StartSurvey item={item}></StartSurvey>
+                </div>}
 
-                <form onSubmit={handleCreateSurvey} className='w-full md:w-2/3 mx-auto'>
+                <h1 className="w-full border border-red-500 mb-10 "></h1>
+                {isOpen && <form onSubmit={handleReport} className='w-full md:w-2/3 mx-auto'>
                     <div className="my-5 border ">
                         <textarea
-                            className="w-full rounded-sm resize-none p-2 outline-none"
+                            className="w-full h-14 rounded-sm resize-none p-2 outline-none"
                             name="description"
                             rows="10"
-                            placeholder="Left your comments hare"
+                            placeholder="Left your report hare"
                         ></textarea>
                     </div>
 
 
                     <div className="my-5">
                         <input
-                            className="bg-[#79C23F] w-full rounded-sm p-2 text-white font-simibold text-xl cursor-pointer"
+                            className="bg-violet-500 w-full rounded-sm p-2 text-white font-simibold text-xl cursor-pointer"
                             type="submit"
-                            value="Add Survey"
+                            value="submit"
                         />
                     </div>
+                </form>}
+                <div onClick={() => setIsOpen(!isOpen)} className="text-purple-600 w-full mb-12 md:w-2/3 mx-auto"><button>Report us hare !</button></div>
+
+                <form onSubmit={handleCreateSurvey} className='w-full md:w-2/3 mx-auto'>
+                    <div className="my-5 border ">
+                        <textarea
+                            className="w-full h-14 rounded-sm resize-none p-2 outline-none"
+                            name="description"
+                            rows="10"
+                            placeholder="Left your comments hare"
+                        ></textarea>
+                    </div>
+
+                    {
+                        users.filter(user => user?.role == 'pro-user' ? <div className="my-5">
+                            <input
+                                className="bg-[#79C23F] w-full rounded-sm p-2 text-white font-simibold text-xl cursor-pointer"
+                                type="submit"
+                                value="Comment"
+                            />
+                        </div> :
+                            ""
+                        )
+                    }
+
                 </form>
 
                 <div className=' w-full md:w-2/3 mx-auto mt-5'>
