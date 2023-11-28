@@ -6,7 +6,9 @@ import useAuth from '../../Hooks/useAuth';
 
 const CheckoutForm = ({ proUserFee }) => {
     const [clientSecret, setClientSecret] = useState("");
-    const { user } = useAuth()
+    const [success, setSuccess] = useState("");
+    const [error, setError] = useState("");
+    const { user, isLoading } = useAuth()
     const stripe = useStripe();
     const elements = useElements();
 
@@ -21,7 +23,7 @@ const CheckoutForm = ({ proUserFee }) => {
             })
             .catch(error => {
                 // Handle errors from the server
-                console.error('Error fetching client secret:', error);
+                setError('Error fetching client secret:', error.message);
             });
     }, [axiosPublic, proUserFee]);
 
@@ -45,9 +47,9 @@ const CheckoutForm = ({ proUserFee }) => {
 
         if (error) {
             // swal(error?.message);
-            console.log(error?.message);
+            setError(error?.message);
         } else {
-            console.log(`Payment success full ${paymentMethod.last4}`)
+            setSuccess(`Payment success full ${paymentMethod.last4}`)
 
         }
         // confirm payment
@@ -63,60 +65,64 @@ const CheckoutForm = ({ proUserFee }) => {
         })
         if (confirmError) {
             // swal(confirmError?.message);
-            console.log(confirmError?.message);
+            setError(confirmError?.message);
         } else {
             if (paymentIntent?.status === "succeeded") {
 
-                console.log(` Payed success fully your paymentIntent id is ${paymentIntent.id}`)
+                setSuccess(` Payed success fully your paymentIntent id is ${paymentIntent.id}`)
 
                 // now save the payment
                 const payment = {
                     email: user?.email,
                     // price: totalPrice,
-                    date: new Date(), //utc date convert by using use moment js
+                    date: new Date(),
                     transitionId: paymentIntent.id,
-                    // cardIds: cart.map(item => item?._id),
-                    // menuIds: cart.map(item => item?.menuId),
-                    // category: cart.map(item => item?.name),
-                    // status: 'pending'
+
                 }
                 const res = await axiosPublic.post('/payments', payment)
-                console.log(res.data)
-                // if (res.data?.paymentResult.insertedId) {
-                //     swal('Thank You for your payment ')
-                // }
-                // refetch()
-                // navigate('/dashboard/payment-history')
+
+                if (res.data.result.insertedId) {
+                    setSuccess('Transaction has been successful and now you are pro-user')
+                }
+                // setError('')
             }
         }
     }
 
+    if (isLoading) {
+        return <div><progress className="progress w-56"></progress></div>
+    }
+
     return (
-        <form onSubmit={handleSubmit}>
-            <CardElement
-                options={{
-                    style: {
-                        base: {
-                            fontSize: '20px',
-                            color: '#424770',
-                            '::placeholder': {
-                                color: '#aab7c4',
+        <div>
+            <p className='text-green-500 mb-5'>{success} Thank you!</p>
+            <p className='text-red-500 mb-5'>{error}</p>
+            <form onSubmit={handleSubmit}>
+                <CardElement
+                    options={{
+                        style: {
+                            base: {
+                                fontSize: '20px',
+                                color: '#424770',
+                                '::placeholder': {
+                                    color: '#aab7c4',
+                                },
+                            },
+                            invalid: {
+                                color: '#9e2146',
+
                             },
                         },
-                        invalid: {
-                            color: '#9e2146',
+                    }}
+                />
 
-                        },
-                    },
-                }}
-            />
-
-            <div className="flex justify-center mt-5">
-                <button type="submit" className="btn bg-yellow-500" disabled={!stripe}>
-                    Pay
-                </button>
-            </div>
-        </form>
+                <div className="flex justify-center mt-5">
+                    <button type="submit" className="btn bg-yellow-500" disabled={!stripe}>
+                        Pay
+                    </button>
+                </div>
+            </form>
+        </div>
     );
 };
 

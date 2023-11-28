@@ -1,14 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
+
 import { Helmet } from 'react-helmet';
 import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
-import { MdDelete } from "react-icons/md";
-import { BiSolidUser } from "react-icons/bi";
+// import { MdDelete } from "react-icons/md";
+// import { BiSolidUser } from "react-icons/bi";
+import useUser from '../../../Hooks/useUser';
+import { useState } from 'react';
+import { AiFillDelete } from 'react-icons/ai';
+import { FaUserEdit } from 'react-icons/fa';
+import { GrUserAdmin } from 'react-icons/gr';
+import DataTable from "react-data-table-component";
 
 
 const ManageUsers = () => {
+    const [selectedRole, setSelectedRole] = useState('')
     const axiosPublic = useAxiosPublic()
-    // const [user] = useUser()
+    const [user] = useUser()
     const { data: users = [], refetch, isLoading } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
@@ -105,69 +113,101 @@ const ManageUsers = () => {
         })
     }
 
+    // Step 3: Filter users based on the selected role
+    const filteredUsers = user.filter(user => {
+        if (selectedRole === '') {
+            return true; // Display all users if no role is selected
+        } else {
+            return user.role === selectedRole;
+        }
+    });
+
+    const columns = [
+        {
+            name: "No",
+            selector: (row, index) => index + 1
+        },
+        {
+            name: "Name",
+            selector: (row) => row.name
+        },
+        {
+            name: "Email",
+            selector: (row) => row.email
+        },
+        {
+            name: "Pro User",
+            selector: (row) => row.role === 'pro-user' ? 'pro-user' : ''
+        },
+        {
+            name: "User",
+            selector: (row) => row.role === 'user' ? 'user' : ''
+        },
+        {
+            name: "Admin Role",
+            cell: (row) => {
+                return row.role === "admin" ? 'Admin'
+                    : (
+                        <button onClick={() => HandelMakeAdmin(row._id)} className=" text-xl text-[#5ae4a7]  flex ">
+                            <GrUserAdmin />
+                        </button>
+                    )
+            }
+
+
+        },
+        {
+            name: "Surveyor Role",
+            cell: (row) => {
+                return row.role === "surveyor" ? 'Surveyor' : (
+                    <button onClick={() => HandelMakeSavior(row._id)} className=" text-xl text-[#2a2a2a]  flex ">
+                        <FaUserEdit />
+                    </button>
+                )
+            }
+
+        },
+        {
+            name: "Action",
+            cell: (row) => (
+                <button onClick={() => HandelDeleteUser(row._id)} className="bg-[#ed5e68] px-3 py-1 rounded text-white flex items-center gap-1">
+                    <AiFillDelete className="text-lg" />  Delete
+                </button>
+            )
+        }
+    ]
 
     return (
         <div>
             <Helmet>
                 <title>Bistro Boss | ManageUser</title>
             </Helmet>
+
             <div>
-                <button className="btn btn-ghost font-semibold text-3xl">Total Users:{users.length}</button>
-
+                <button className="btn btn-ghost font-semibold text-3xl ">Total Users:{users.length}</button>
+                <div className="px-6 mb-5 fob">
+                    <label className="text-lg font-medium" htmlFor="roleFilter">Filter by Role: </label>
+                    <select className=" text-base md:text-lg"
+                        id="roleFilter"
+                        onChange={(e) => setSelectedRole(e.target.value)}
+                        value={selectedRole}
+                    >
+                        <option value="">All</option>
+                        <option value="user">User</option>
+                        <option value="pro-user">Pro User</option>
+                        <option value="admin">Admin</option>
+                        <option value="surveyor">Surveyor</option>
+                    </select>
+                </div>
                 {/* table */}
-                <div className="overflow-x-auto mt-4">
-                    <table className="table w-full">
-                        <thead className="bg-yellow-500 ">
-
-                            <tr >
-
-                                <th></th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Admin Role</th>
-                                <th>Surveyor Role</th>
-                                <th>Action</th>
-
-                            </tr>
-                        </thead>
-                        {
-                            users?.map((user, index) => <tbody key={user._id}>
-                                {/* row 1 */}
-                                <tr>
-                                    <td>{index + 1}</td>
-                                    <td>
-                                        {user?.name}
-                                    </td>
-                                    <td>
-                                        {user?.email}
-
-                                    </td>
-
-                                    <td>
-                                        {
-                                            user.role === 'admin' ? 'admin' :
-                                                <button onClick={() => HandelMakeAdmin(user)}
-                                                    className="btn bg-yellow-500"><BiSolidUser></BiSolidUser></button>
-                                        }
-                                    </td>
-                                    <td>
-                                        {
-                                            user.role === 'surveyor' ? 'surveyor' :
-                                                <button onClick={() => HandelMakeSavior(user)}
-                                                    className="btn bg-yellow-500">User</button>
-                                        }
-                                    </td>
-
-                                    <th>
-                                        <button onClick={() => HandelDeleteUser(user)}
-                                            className="btn text-red-600 font-3xl">
-                                            <MdDelete></MdDelete>
-                                        </button>
-                                    </th>
-                                </tr>
-                            </tbody>)
-                        }
-                    </table>
+                <div className="my-10 px-6" >
+                    <DataTable
+                        columns={columns}
+                        data={filteredUsers}
+                        pagination
+                        highlightOnHover
+                        responsive
+                    />
                 </div>
             </div>
         </div>

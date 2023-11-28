@@ -22,8 +22,8 @@ const CreateSurvey = () => {
             question1: form.question1.value,
             question2: form.question2.value,
             question3: form.question3.value,
-            like: form.like.value,
-            disLike: form.disLike.value,
+            likesCount: parseInt(form.like.value,),
+            disLike: parseInt(form.disLike.value)
 
         };
 

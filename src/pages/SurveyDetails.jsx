@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import Container from '../Share/Container';
 import { AiFillDislike, AiFillLike } from 'react-icons/ai';
 import useAuth from '../Hooks/useAuth';
@@ -14,33 +14,19 @@ import useUser from '../Hooks/useUser';
 const SurveyDetails = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [open, setOpen] = useState(false)
+    const [prouser, setProUser] = useState()
     const item = useLoaderData()
     const [users] = useUser()
 
     const axiosPublic = useAxiosPublic()
     const { user, loading } = useAuth()
-    const { id } = useParams()
+    // const { id } = useParams()
 
     const [likesCount, setLikesCount] = useState(0);
-    const [isLikeButtonEnabled, setIsLikeButtonEnabled] = useState(true);
-
-
-    useEffect(() => {
-        // const email = item?.userEmail
-        // Check localStorage to see if the user has already liked this post
-        const userLikedPost = user?.email;
-        console.log(userLikedPost)
-        if (userLikedPost) {
-            return setIsLikeButtonEnabled(false);
-        } else {
-            return setIsLikeButtonEnabled(true);
-        }
-    }, [user, item?.userEmail]);
 
     const handleLikeClick = async (id) => {
         try {
-            // setIsLikeButtonEnabled(false)
-            // Increment the likes count in the state immediately
+
             setLikesCount((prevLikesCount) => prevLikesCount + 1);
 
             // Send the PATCH request to update likes count
@@ -94,7 +80,10 @@ const SurveyDetails = () => {
         }
     }
 
-
+    useEffect(() => {
+        const proUser = users.filter(user => user?.role == 'pro-user')
+        setProUser(proUser)
+    }, [users])
 
     if (loading) {
         return ('Loading...')
@@ -117,8 +106,8 @@ const SurveyDetails = () => {
 
 
                     <div className="flex  justify-center items-center gap-x-6 text-2xl mt-4">
-                        <button onClick={() => handleLikeClick(id)} disabled={isLikeButtonEnabled} className={`
-                        ${isLikeButtonEnabled ? '' : 'disabled'} flex justify-center gap-2 items-center`}>
+                        <button onClick={() => handleLikeClick(item._id)} className={`
+                        flex justify-center gap-2 items-center`}>
                             <p><AiFillLike className='text-red-500'></AiFillLike></p>
                             <p>{item?.likesCount}</p>
                         </button>
@@ -171,15 +160,23 @@ const SurveyDetails = () => {
                     </div>
 
                     {
-                        users.filter(user => user?.role == 'pro-user' ? <div className="my-5">
+                        prouser ? <div className="my-5">
                             <input
                                 className="bg-[#79C23F] w-full rounded-sm p-2 text-white font-simibold text-xl cursor-pointer"
                                 type="submit"
                                 value="Comment"
                             />
                         </div> :
-                            ""
-                        )
+                            <Link to='/get-pro'>
+                                <div className="my-5">
+                                    <input
+                                        className="bg-[#79C23F] w-full rounded-sm p-2 text-white font-simibold text-xl cursor-pointer"
+                                        type="submit"
+                                        value="get pro user"
+                                    />
+                                </div>
+                            </Link>
+
                     }
 
                 </form>
