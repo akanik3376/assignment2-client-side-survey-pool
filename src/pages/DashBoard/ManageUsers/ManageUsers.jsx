@@ -87,7 +87,8 @@ const ManageUsers = () => {
 
 
     //delete user
-    const HandelDeleteUser = user => {
+    const HandelDeleteUser = row => {
+        console.log(row)
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -98,7 +99,7 @@ const ManageUsers = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPublic.delete(`/users/${user._id}`)
+                axiosPublic.delete(`/users/${row}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             refetch()
@@ -136,12 +137,12 @@ const ManageUsers = () => {
             selector: (row) => row.email
         },
         {
-            name: "Pro User",
-            selector: (row) => row.role === 'pro-user' ? 'pro-user' : ''
-        },
-        {
             name: "User",
             selector: (row) => row.role === 'user' ? 'user' : ''
+        },
+        {
+            name: "Pro User",
+            selector: (row) => row.role === 'pro-user' ? 'pro-user' : ''
         },
         {
             name: "Admin Role",

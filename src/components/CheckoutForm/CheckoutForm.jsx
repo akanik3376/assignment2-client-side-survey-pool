@@ -74,7 +74,7 @@ const CheckoutForm = ({ proUserFee }) => {
                 // now save the payment
                 const payment = {
                     email: user?.email,
-                    // price: totalPrice,
+                    price: proUserFee,
                     date: new Date(),
                     transitionId: paymentIntent.id,
 

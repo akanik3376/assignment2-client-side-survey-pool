@@ -1,30 +1,34 @@
-import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useLoaderData, useParams } from "react-router-dom";
 import Container from "../../Share/Container";
 import swal from "sweetalert";
+// import { useEffect, useState } from "react";
+import useUser from "../../Hooks/useUser";
 
 
 const CreateSurvey = () => {
+    // const [survey, setSurvey] = useState()
     const axiosPublic = useAxiosPublic()
-    const { user } = useAuth()
+    const [users] = useUser()
+    console.log(users)
+    // const { user, isLoading } = useUser()
     const data = useLoaderData()
     // console.log(data)
     const { id } = useParams()
+
 
     const handleCreateSurvey = async (event) => {
         event.preventDefault();
         const form = event.target;
 
         const createSurvey = {
-            email: form.email.value,
+            // email: survey.email,
             surveyTitle: form.surveyTitle.value,
             category: form.category.value,
             date: form.date.value,
             description: form.description.value,
             question1: form.question1.value,
-            question2: form.question2.value,
-            question3: form.question3.value,
+
             disLike: form.disLike.value,
             like: form.like.value,
 
@@ -38,10 +42,6 @@ const CreateSurvey = () => {
 
 
     };
-
-
-
-
 
 
     return (
@@ -61,7 +61,7 @@ const CreateSurvey = () => {
                                         type="text"
                                         name="email"
                                         placeholder="Email"
-                                        defaultValue={user?.email}
+                                    // defaultValue={survey.email}
 
                                     />
                                 </div>
@@ -111,22 +111,7 @@ const CreateSurvey = () => {
                                     <input className="bg-white w-full p-2 rounded-sm outline-none" type="text" name="question1" placeholder="Enter Your Question  ?" required defaultValue={data.question1} />
                                 </div>
                             </div>
-                            {/* question */}
-                            <div className="space-y-2" >
 
-                                <div>
-                                    <p className="text-lg text-[#2a2a2a]" >Question 2:</p>
-                                    <input className="bg-white w-full p-2 rounded-sm outline-none" type="text" name="question2" placeholder="Enter Your Question  ?" required defaultValue={data.question2} />
-                                </div>
-                            </div>
-                            {/* question */}
-                            <div className="space-y-2" >
-
-                                <div>
-                                    <p className="text-lg text-[#2a2a2a]" >Question 3:</p>
-                                    <input className="bg-white w-full p-2 rounded-sm outline-none" type="text" name="question3" placeholder="Enter Your Question  ?" required defaultValue={data.question3} />
-                                </div>
-                            </div>
 
                             <div className="flex gap-4 justify-between">
                                 <div className="my-5 ">

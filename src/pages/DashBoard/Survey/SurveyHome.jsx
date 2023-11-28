@@ -55,6 +55,7 @@ const SurveyHome = () => {
                             <th>Delete</th>
 
 
+
                         </tr>
                     </thead>
                     {
@@ -83,6 +84,7 @@ const SurveyHome = () => {
                                         className="btn bg-yellow-500">Delete</button>
 
                                 </td>
+
 
 
                             </tr>

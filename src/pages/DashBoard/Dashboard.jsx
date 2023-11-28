@@ -1,16 +1,20 @@
-import { NavLink, Outlet, useLoaderData } from "react-router-dom";
-import { FaHome, FaFileContract, FaUser, FaBookDead } from "react-icons/fa";
+import { NavLink, Outlet } from "react-router-dom";
+import { FaHome, FaUser, FaBookDead, FaEdit, FaPager, FaCcAmazonPay } from "react-icons/fa";
+import { IoNotifications } from "react-icons/io5";
+import { MdOutlineManageAccounts } from "react-icons/md";
+
 import { IoMdContact } from "react-icons/io";
+import useAuth from "../../Hooks/useAuth";
 
 
 const Dashboard = () => {
-    const item = useLoaderData()
-    //TO DO:
-    const isAdmin = true
-    const isSurvey = false
+    const { logoutUser } = useAuth()
+    const HandelLogout = () => {
+        logoutUser()
 
+    }
     return (
-        <div className="flex gap-12 p-8">
+        <div className="flex gap-7 m-3">
             {/* side bar */}
             <div className="w-64 bg-[#FF00001A] min-h-screen">
                 <ul className="menu uppercase font-bold flex flex-col   space-y-2  mt-9">
@@ -18,7 +22,13 @@ const Dashboard = () => {
 
 
                     <li>
-                        <NavLink to='/dashboard/admin-home'><FaHome />Admin Home</NavLink>
+                        <NavLink to='/dashboard/admin-home'><FaHome />Home</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/dashboard/admin-home'><MdOutlineManageAccounts />Survey Management</NavLink>
+                    </li>
+                    <li>
+                        <NavLink to='/dashboard/payments'><FaCcAmazonPay />payments of pro-user</NavLink>
                     </li>
                     <li>
                         <NavLink to='/dashboard/manage-users'><FaUser />
@@ -42,10 +52,10 @@ const Dashboard = () => {
                         <NavLink to={`/dashboard/survey/update`}><FaBookDead />Update Survey</NavLink>
                     </li> */}
                     <li>
-                        <NavLink to={`/dashboard/feedback`}><FaBookDead />all feedback</NavLink>
+                        <NavLink to={`/dashboard/feedback`}><IoNotifications />all feedback</NavLink>
                     </li>
                     <li>
-                        <NavLink to={`/dashboard/feedback`}><FaBookDead />Survey responses</NavLink>
+                        <NavLink to={`/dashboard/feedback`}><IoNotifications />Survey responses</NavLink>
                     </li>
 
 
@@ -65,7 +75,10 @@ const Dashboard = () => {
                         <NavLink to='/contact-us'><IoMdContact /> Contact Us</NavLink>
                     </li>
                     <li>
-                        <NavLink to='/menu'><FaFileContract />Survey Page</NavLink>
+                        <NavLink to='/menu'><FaPager />Survey Page</NavLink>
+                    </li>
+                    <li onClick={HandelLogout}>
+                        <NavLink to='/menu'><FaEdit />Logout</NavLink>
                     </li>
                 </ul>
 

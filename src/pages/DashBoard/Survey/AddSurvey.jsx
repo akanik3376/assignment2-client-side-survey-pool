@@ -1,38 +1,51 @@
 import useAuth from "../../../Hooks/useAuth";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useUser from "../../../Hooks/useUser";
 
 
 const CreateSurvey = () => {
     const axiosPublic = useAxiosPublic()
     const { user } = useAuth()
+    const [users] = useUser()
+    console.log(users)
+    let singleUser
+    users?.forEach(item => {
+        if (item?.email === user?.email) {
+            singleUser = item
+        }
+
+        console.log(singleUser)
+    });
 
     const handleCreateSurvey = async (event) => {
         event.preventDefault();
+
         const form = event.target;
 
         const createSurvey = {
-            name: user?.displayName,
-
-            email: form.email.value,
+            surveyorEmail: singleUser?.email,
             surveyTitle: form.surveyTitle.value,
             category: form.category.value,
             date: form.date.value,
             description: form.description.value,
             question1: form.question1.value,
-            question2: form.question2.value,
-            question3: form.question3.value,
+
             likesCount: parseInt(form.like.value,),
             disLike: parseInt(form.disLike.value)
 
         };
 
 
-
-        const res = await axiosPublic.post("/api/v1/survey", createSurvey)
-        console.log(res.data);
-        if (res.data.insertedId) {
-            Swal.fire('Survey successfully created!')
+        if (singleUser.role == 'surveyor') {
+            const res = await axiosPublic.post("/api/v1/survey", createSurvey)
+            console.log(res.data);
+            if (res.data.insertedId) {
+                Swal.fire('Survey successfully created!')
+            }
+        }
+        else {
+            Swal.fire('You are not a surveyor!')
         }
 
 
@@ -55,7 +68,7 @@ const CreateSurvey = () => {
                                     type="text"
                                     name="email"
                                     placeholder="Email"
-                                    defaultValue={user?.email}
+                                    defaultValue={singleUser?.email}
                                 />
                             </div>
                             <div className="flex-1">
@@ -105,27 +118,6 @@ const CreateSurvey = () => {
 
 
 
-                        </div>
-
-                        <div className="my-5 ">
-                            <p className="text-[2a2a2a] font-bold">Question2:</p>
-                            <input
-                                className="w-full rounded-sm p-2 outline-none "
-                                name='question2'
-                                placeholder={`Enter your question 2 ?`}
-                            />
-
-
-
-                        </div>
-
-                        <div className="my-5 ">
-                            <p className="text-[2a2a2a] font-bold">Question3:</p>
-                            <input
-                                className="w-full rounded-sm p-2 outline-none "
-                                name='question3'
-                                placeholder={`Enter your question 3 ?`}
-                            />
                         </div>
 
                         <div className="flex gap-4 justify-between">

@@ -17,6 +17,7 @@ import SurveyDetails from '../pages/SurveyDetails';
 import Update from '../components/SurveyCart/Update';
 import GetPro from '../pages/GetPro/GetPro';
 import PrivetRoot from './PrivetRoot';
+import Payments from '../pages/DashBoard/Payments/Payments';
 
 
 const routes = createBrowserRouter([
@@ -79,6 +80,10 @@ const routes = createBrowserRouter([
             {
                 path: 'admin-home',
                 element: <AdminHome />
+            },
+            {
+                path: 'payments',
+                element: <Payments />
             },
             {
                 path: 'manage-users',
