@@ -52,7 +52,7 @@ const Dashboard = () => {
                         <NavLink to={`/dashboard/survey/update`}><FaBookDead />Update Survey</NavLink>
                     </li> */}
                     <li>
-                        <NavLink to={`/dashboard/feedback`}><IoNotifications />all feedback</NavLink>
+                        <NavLink to='/dashboard/feed-back'><IoNotifications />all feedback</NavLink>
                     </li>
                     <li>
                         <NavLink to={`/dashboard/feedback`}><IoNotifications />Survey responses</NavLink>

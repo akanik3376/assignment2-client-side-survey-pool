@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const SurveyCart = ({ item }) => {
     // console.log(item)
-    const { _id, category, description, question1, question2, question3, surveyTitle, likesCount, disLike } = item || {}
+    const { _id, category, description, question1, surveyTitle, likesCount, disLike } = item || {}
     // console.log(item)
     return (
 
@@ -23,8 +23,7 @@ const SurveyCart = ({ item }) => {
 
                             <div>
                                 <h2 className="text-sm mb-5"><span className=' border-b-2 border-black font-bold text-xl'>Question1:</span> {question1}</h2>
-                                <h2 className="text-sm mb-5"><span className=' border-b-2 border-black font-bold text-xl'>Question2:</span> {question2}</h2>
-                                <h2 className="text-sm mb-5"><span className=' border-b-2 border-black font-bold text-xl'>Question3:</span> {question3}</h2>
+
                             </div>
 
                         </div>

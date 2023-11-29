@@ -15,7 +15,7 @@ const CreateSurvey = () => {
             singleUser = item
         }
 
-        console.log(singleUser)
+        // console.log(singleUser)
     });
 
     const handleCreateSurvey = async (event) => {
@@ -67,7 +67,7 @@ const CreateSurvey = () => {
                                     className="bg-white p-2 rounded-sm w-full outline-none"
                                     type="text"
                                     name="email"
-                                    placeholder="Email"
+                                    placeholder="Email" readOnly
                                     defaultValue={singleUser?.email}
                                 />
                             </div>

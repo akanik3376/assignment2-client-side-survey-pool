@@ -18,6 +18,7 @@ import Update from '../components/SurveyCart/Update';
 import GetPro from '../pages/GetPro/GetPro';
 import PrivetRoot from './PrivetRoot';
 import Payments from '../pages/DashBoard/Payments/Payments';
+import FeetBack from '../pages/DashBoard/FeetBack';
 
 
 const routes = createBrowserRouter([
@@ -98,6 +99,10 @@ const routes = createBrowserRouter([
             {
                 path: 'add-survey',
                 element: <AddSurvey />
+            },
+            {
+                path: 'feed-back',
+                element: <FeetBack />
             },
 
 

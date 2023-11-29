@@ -22,7 +22,7 @@ const AdminHome = () => {
             confirmButtonText: 'Yes!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPublic.patch(`/api/v1/survey/${id}`, { status: 'Publish', feedback })
+                axiosPublic.patch(`/api/v1/survey/${id}`, { status: 'Publish' })
                     .then(res => {
                         refetch()
                         if (res.data.modifiedCount > 0) {

@@ -22,7 +22,7 @@ const CreateSurvey = () => {
         const form = event.target;
 
         const createSurvey = {
-            // email: survey.email,
+            email: data.email,
             surveyTitle: form.surveyTitle.value,
             category: form.category.value,
             date: form.date.value,
@@ -61,7 +61,8 @@ const CreateSurvey = () => {
                                         type="text"
                                         name="email"
                                         placeholder="Email"
-                                    // defaultValue={survey.email}
+                                        defaultValue={data.email}
+                                        readOnly
 
                                     />
                                 </div>

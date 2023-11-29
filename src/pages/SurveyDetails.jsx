@@ -49,7 +49,7 @@ const SurveyDetails = () => {
             // setIsLikeButtonEnabled(false);
         }
     };
-    // console.log(likesCount)
+    // console.log(comments)
     const handleCreateSurvey = async (event) => {
         event.preventDefault();
         const form = event.target;
@@ -73,6 +73,9 @@ const SurveyDetails = () => {
             photo: user?.photoURL,
             email: user?.email,
             description: form.description.value,
+            surveyEmail: item.email,
+            category: item.category,
+            title: item.surveyTitle
         };
         const res = await axiosPublic.post('/reports', createSurvey)
         if (res.data.insertedId) {
