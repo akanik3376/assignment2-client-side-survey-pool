@@ -22,8 +22,11 @@ const ManageUsers = () => {
         queryFn: async () => {
             try {
                 const res = await axiosPublic.get('/users');
-                // console.log(res.data)
+                if (res.data) {
+                    refetch()
+                }
                 return res.data;
+
             } catch (error) {
                 console.error('Error fetching user data:', error);
 

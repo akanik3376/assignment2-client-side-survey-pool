@@ -26,7 +26,7 @@ const AdminHome = () => {
                     .then(res => {
                         refetch()
                         if (res.data.modifiedCount > 0) {
-
+                            refetch()
                             Swal.fire(
                                 'Yes!',
                                 `${name}`,
@@ -52,10 +52,10 @@ const AdminHome = () => {
             if (result.isConfirmed) {
                 axiosPublic.patch(`/api/v1/survey/${id}`, { status: 'unpublish', feedback })
                     .then(res => {
-                        console.log(res.data)
-                        refetch()
-                        if (res.data.modifiedCount > 0) {
 
+
+                        if (res.data.modifiedCount > 0) {
+                            refetch()
                             Swal.fire(
                                 'Unpublished!',
                                 `${name}`,

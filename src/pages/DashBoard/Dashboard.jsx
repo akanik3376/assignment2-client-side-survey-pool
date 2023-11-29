@@ -55,7 +55,7 @@ const Dashboard = () => {
                         <NavLink to='/dashboard/feed-back'><IoNotifications />all feedback</NavLink>
                     </li>
                     <li>
-                        <NavLink to={`/dashboard/feedback`}><IoNotifications />Survey responses</NavLink>
+                        <NavLink to='admin-fed-back '><IoNotifications />Survey responses</NavLink>
                     </li>
 
 

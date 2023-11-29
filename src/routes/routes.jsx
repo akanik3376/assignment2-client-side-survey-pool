@@ -19,6 +19,7 @@ import GetPro from '../pages/GetPro/GetPro';
 import PrivetRoot from './PrivetRoot';
 import Payments from '../pages/DashBoard/Payments/Payments';
 import FeetBack from '../pages/DashBoard/FeetBack';
+import AdminFedBack from '../pages/DashBoard/AdminFedBack/AdminFedBack';
 
 
 const routes = createBrowserRouter([
@@ -103,6 +104,10 @@ const routes = createBrowserRouter([
             {
                 path: 'feed-back',
                 element: <FeetBack />
+            },
+            {
+                path: 'admin-fed-back',
+                element: <AdminFedBack />
             },
 
 
