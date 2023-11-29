@@ -32,8 +32,8 @@ const CreateSurvey = () => {
             question1: form.question1.value,
 
             likesCount: parseInt(form.like.value,),
-            disLike: parseInt(form.disLike.value)
-
+            disLike: parseInt(form.disLike.value),
+            time: new Date().toLocaleTimeString(),
         };
 
 
@@ -88,9 +88,9 @@ const CreateSurvey = () => {
                                     <option value="Education">Education</option>
                                     <option value="Health-Care">Health Care</option>
                                     <option value="Ecommerce">Ecommerce</option>
-                                    {/* <option value="Human-Resources">Human Resources</option>
+                                    <option value="Human-Resources">Human Resources</option>
                                     <option value="Customers">Customers</option>
-                                    <option value="Market-Research">Market Research</option> */}
+                                    <option value="Market-Research">Market Research</option>
                                 </select>
                             </div>
                             <div className="flex-1">

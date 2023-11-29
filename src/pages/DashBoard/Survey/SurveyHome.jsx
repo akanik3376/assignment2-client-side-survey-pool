@@ -20,9 +20,9 @@ const SurveyHome = () => {
             if (result.isConfirmed) {
                 axiosPublic.delete(`/api/v1/survey/${id}`)
                     .then(res => {
-                        refetch()
-                        if (res.data.deletedCount > 0) {
 
+                        if (res.data.deletedCount > 0) {
+                            refetch()
                             Swal.fire(
                                 'Deleted!',
                                 `${name}`,

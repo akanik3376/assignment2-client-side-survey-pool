@@ -1,50 +1,37 @@
 /* eslint-disable react/prop-types */
-import { AiFillDislike, AiFillLike, } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 
 // import surveyImg from '../../assets/images/online-survey-tablet_3446-296.avif';
 
 const SurveyCart = ({ item }) => {
     // console.log(item)
-    const { _id, category, description, question1, surveyTitle, likesCount, disLike } = item || {}
+    const { _id, category, surveyTitle, likesCount, disLike } = item || {}
     // console.log(item)
     return (
 
-        <div>
-            {
-                item?.status === 'Publish' && <div className=' bg-blue-300 p-5 rounded-lg'>
-                    <Link to={`/survey/details/${_id}`}>
-                        <div className='flex-col space-y-2  rounded-md'>
-                            <h2 className="text-xl font-semibold"><span className='border-b-2 border-red-500 font-bold text-xl'>Category:</span>
-                                {category}</h2>
-                            <p><span className='border-b-2 border-red-500 font-bold text-xl'>Description:</span> {description}</p>
 
-                            <h2 className="text-xl"><span className='border-b-2 border-red-500 font-bold text-xl'>Title:</span> {surveyTitle}</h2>
 
-                            <div>
-                                <h2 className="text-sm mb-5"><span className=' border-b-2 border-black font-bold text-xl'>Question1:</span> {question1}</h2>
+        <Link to={`/survey/details/${_id}`} className="flex flex-col min-h-full">
+            <div className="bg-[#f7f7f7] p-8 rounded flex flex-col justify-between h-full">
+                <div className="space-y-2">
+                    <h2 className="text-xl font-semibold text-[#c4739e]">Title: {surveyTitle}</h2>
 
-                            </div>
-
-                        </div>
-                    </Link>
-
-                    <div className="flex gap-x-6 text-2xl mt-4">
-                        <div className="flex items-center">
-                            <AiFillLike className={`${likesCount > 0 && "text-green-900"}`}></AiFillLike>
-                            <p>{likesCount}</p>
-                        </div>
-
-                        <div className="flex items-center">
-                            <AiFillDislike className={`${likesCount > 0 && "text-red-500"}`}></AiFillDislike >
-                            <p>{disLike}</p>
-                        </div>
-                    </div>
+                    <h2 className="text-2xl font-bold text-[#76757a]"><span className="text-red-500" >Category:</span> {category}</h2>
 
 
                 </div>
-            }
-        </div>
+
+                <div className="flex justify-between" >
+
+                    <p className="font-bold text-blue-500">Total Like: {likesCount}</p>
+                    <p className="font-bold text-blue-500">Dis Like:{disLike}</p>
+
+                </div>
+
+            </div>
+        </Link>
+
+
 
     );
 };

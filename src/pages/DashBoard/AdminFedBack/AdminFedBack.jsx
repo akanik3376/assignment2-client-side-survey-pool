@@ -3,9 +3,11 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import { useState } from "react";
 import DataTable from "react-data-table-component";
+import useAuth from "../../../Hooks/useAuth";
 
 const AdminFedBack = () => {
-    // const user = useAuth()
+    const user = useAuth()
+    console.log(user)
     const axiosPublic = useAxiosPublic()
     const { data: survey = [] } = useQuery({
         queryKey: ['survey'],
@@ -44,10 +46,7 @@ const AdminFedBack = () => {
             name: "No",
             selector: (row, index) => index + 1
         },
-        {
-            name: "Role",
-            selector: (row) => row.name
-        },
+
 
         {
             name: "Category",
@@ -72,8 +71,7 @@ const AdminFedBack = () => {
                     <h3 className="font-bold text-lg">Report Details</h3>
                     {selectedReport && (
                         <>
-                            <p className='text-lg' >Name: {selectedReport.name}</p>
-                            <p>Email: {selectedReport.email}</p>
+
                             <p>Survey Title: {selectedReport.surveyTitle}</p>
                             <p>Feedback: {selectedReport.feedback}</p>
                             {/* Add more details as needed */}

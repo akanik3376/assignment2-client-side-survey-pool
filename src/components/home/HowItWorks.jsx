@@ -1,28 +1,34 @@
-import img from '../../assets/images/flat-design-how-it-works-badges_23-2149522560.jpg'
+import { useQuery } from "@tanstack/react-query";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import RecentSurveyCard from "../HomeCart";
+
 const HowItWorks = () => {
+    const axiosPublic = useAxiosPublic()
+
+    const { data: recentSurvey = [] } = useQuery({
+        queryKey: ['recentSurvey'],
+        queryFn: async () => {
+            const res = await axiosPublic.get("/api/v1/recent-surveys")
+            return res.data
+        }
+    });
+    console.log(recentSurvey);
+
     return (
-        <div className='my-16'>
-            <div className="h-60">
-                <img className='w-full object-cover max-h-60' src={img} alt="" />
+        <div className="my-10" >
+
+            <h2 className="text-3xl font-semibold text-center text-[#5ae4a7] mb-5">
+                Recent Survey
+            </h2>
+
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5' >
+                {recentSurvey.map((item) => <RecentSurveyCard key={item._id} item={item}></RecentSurveyCard>)}
             </div>
 
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-12'>
-                <div className='flex flex-col btn-outline p-4 hover:bg-blue-300 rounded-xl'>
-                    <h4 className="text-xl  font-semibold">Survey Builder</h4>
-                    <ul>
-                        <li>Utilize an easy-to-use survey builder with drag-and-drop functionality.
 
-                        </li>
-                        <li> Choose from various question types: multiple-choice, open-ended, rating scales, etc.</li>
-                        <li>Customize questions with formatting options and media embeds.</li>
-                    </ul>
-                </div>
-                <div className='flex flex-col btn-outline p-4 hover:bg-blue-300 rounded-xl'>
-                    <h4 className="text-xl  font-semibold">Quick Start?</h4>
 
-                </div>
-            </div>
-        </div >
+
+        </div>
     );
 };
 

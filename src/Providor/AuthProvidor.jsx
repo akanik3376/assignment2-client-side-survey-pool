@@ -44,10 +44,11 @@ const AuthProvider = ({ children }) => {
     }
     // update user
     const updateProfileUser = (name, photo) => {
-        setIsLoading()
+
         return updateProfile(auth.currentUser, {
-            displayName: name, photoURL: photo
-        })
+            displayName: name,
+            photoURL: photo,
+        });
     }
 
 
@@ -57,21 +58,24 @@ const AuthProvider = ({ children }) => {
         const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser)
             if (currentUser) {
-                const userInfo = {
-                    email: currentUser.email,
-                    name: currentUser.displayName,
-                    role: "user",
+
+                if (currentUser) {
+                    const userInfo = { email: currentUser.email }
+
+                    axiosPublic.post('/jwt', userInfo)
+                        .then(res => {
+                            if (res.data.token) {
+                                localStorage.setItem('access-token', res.data.token)
+                                setIsLoading(false)
+                            }
+                        })
+                }
+                else {
+                    localStorage.removeItem('access-token')
+                    setIsLoading(false)
                 }
 
-                axiosPublic.post('/users', userInfo)
-                    .then(res => {
-                        console.log(res)
-                        // if (res.data.token) {
-                        //     localStorage.setItem('access-token', res.data.token)
-                        //     setIsLoading(false)
-                        // }
-                        setIsLoading(false)
-                    })
+
             }
             else {
                 // localStorage.removeItem('access-token')

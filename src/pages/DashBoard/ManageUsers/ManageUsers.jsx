@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { Helmet } from 'react-helmet';
-import useAxiosPublic from '../../../Hooks/useAxiosPublic';
+// import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 // import { MdDelete } from "react-icons/md";
 // import { BiSolidUser } from "react-icons/bi";
@@ -11,17 +11,19 @@ import { AiFillDelete } from 'react-icons/ai';
 import { FaUserEdit } from 'react-icons/fa';
 import { GrUserAdmin } from 'react-icons/gr';
 import DataTable from "react-data-table-component";
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
 
 
 const ManageUsers = () => {
     const [selectedRole, setSelectedRole] = useState('')
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
+    // const axiosPublic = useAxiosPublic()
     const [user] = useUser()
     const { data: users = [], refetch, isLoading } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
             try {
-                const res = await axiosPublic.get('/users');
+                const res = await axiosSecure.get('/users');
                 if (res.data) {
                     refetch()
                 }
@@ -48,7 +50,7 @@ const ManageUsers = () => {
             confirmButtonText: 'Yes !'
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPublic.patch(`/users/admin/${user._id}`)
+                axiosSecure.patch(`/users/admin/${user._id}`)
                     .then(res => {
                         if (res.data.modifiedCount > 0) {
                             refetch()
@@ -73,7 +75,7 @@ const ManageUsers = () => {
             confirmButtonText: 'Yes !'
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPublic.patch(`/users/surveyor/${user._id}`)
+                axiosSecure.patch(`/users/surveyor/${user._id}`)
                     .then(res => {
                         if (res.data.modifiedCount > 0) {
                             refetch()
@@ -102,7 +104,7 @@ const ManageUsers = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosPublic.delete(`/users/${row}`)
+                axiosSecure.delete(`/users/${row}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             refetch()

@@ -4,20 +4,26 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import { useState } from "react";
 
-import useAuth from "../../Hooks/useAuth";
+// import useAuth from "../../Hooks/useAuth";
 
 const FeetBack = () => {
-    const user = useAuth()
+    // const { user } = useAuth()
     const axiosPublic = useAxiosPublic()
     const { data: report = [] } = useQuery({
         queryKey: ['report'],
         queryFn: async () => {
             // const response = await axiosPublic.get(`/reports/${user.email}`)
-            const res = await axiosPublic.get(`/reports/${user.email}`)
+            const res = await axiosPublic.get(`/reports`)
+            console.log(res.data)
             return res.data
         }
     });
-    // console.log(report);
+
+
+    // useEffect(() => {
+    //     report.map(r => setData(r.description))
+    // })
+
 
     const [selectedReport, setSelectedReport] = useState(null);
 
@@ -42,12 +48,12 @@ const FeetBack = () => {
         },
 
         {
-            name: "Category",
-            selector: (row) => row.category
+            name: "email",
+            selector: (row) => row.userEmail
         },
         {
             name: "Survey Title",
-            selector: (row) => row.surveyTitle
+            selector: (row) => row.title
 
         },
         {
@@ -66,8 +72,8 @@ const FeetBack = () => {
                         <>
                             <p className='text-lg' >Name: {selectedReport.name}</p>
                             <p>Email: {selectedReport.email}</p>
-                            <p>Survey Title: {selectedReport.surveyTitle}</p>
-                            <p>Report: {selectedReport.report}</p>
+                            <p>Survey Title: {selectedReport.title}</p>
+                            <p>Report: {selectedReport.description}</p>
                             {/* Add more details as needed */}
                         </>
                     )}

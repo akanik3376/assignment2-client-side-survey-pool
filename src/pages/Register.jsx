@@ -2,29 +2,48 @@ import Container from '../Share/Container';
 import { FcGoogle } from 'react-icons/fc'
 
 import registerImg from '../assets/login/sign-concept-illustration_114360-125.avif'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../Hooks/useAuth';
 import { IoEyeSharp } from 'react-icons/io5';
-import Swal from 'sweetalert2';
 import { useState } from 'react';
+import swal from 'sweetalert';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 const Register = () => {
     const [isShow, setIsShow] = useState(false)
-    const { createUser } = useAuth()
-    const location = useLocation()
+    const { createUser, updateProfileUser } = useAuth()
+    const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
     const HandelSubmit = e => {
         e.preventDefault()
         const email = e.target.email.value
         const password = e.target.password.value
-
+        const name = e.target.name.value
+        const photo = e.target.photo.value
+        console.log(name, photo)
         // create user
         createUser(email, password)
             .then(res => {
-                if (res) {
-                    Swal.fire("User create success fully");
-                    navigate(location?.state ? location.state : '/')
-                }
+                const loggerUser = res.user
+                console.log(loggerUser)
+                updateProfileUser(name, photo)
+                    .then(() => {
+                        const userInfo = {
+                            email: email,
+                            name: name,
+                            photoURL: photo,
+                            role: "user",
+                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                console.log(res)
+
+                                swal('User create success fully')
+                                navigate('/')
+                            })
+
+                    })
+
             })
             .catch(err => console.log(err))
 
@@ -62,6 +81,19 @@ const Register = () => {
                                         data-temp-mail-org='0'
                                     />
                                 </div>
+                                <div>
+                                    <label htmlFor='email' className='block mb-2 text-sm'>
+                                        Name
+                                    </label>
+                                    <input
+                                        type='text'
+                                        name='photo'
+
+                                        placeholder='photo url'
+                                        className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-rose-500 bg-gray-200 text-gray-900'
+                                        data-temp-mail-org='0'
+                                    />
+                                </div>
                                 {/* <div>
                                     <label htmlFor='image' className='block mb-2 text-sm'>
                                         Select Image:
@@ -70,7 +102,7 @@ const Register = () => {
                                         required
                                         type='file'
                                         id='image'
-                                        name='image'
+                                        name='photo'
                                         accept='image/*'
                                     />
                                 </div> */}

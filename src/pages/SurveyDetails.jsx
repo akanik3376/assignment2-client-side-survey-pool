@@ -15,14 +15,17 @@ const SurveyDetails = () => {
     const [isOpen, setIsOpen] = useState(false)
     const [open, setOpen] = useState(false)
     const [prouser, setProUser] = useState()
+    const [likesCount, setLikesCount] = useState(0);
     const item = useLoaderData()
+
+
     const [users] = useUser()
 
     const axiosPublic = useAxiosPublic()
     const { user, loading } = useAuth()
     // const { id } = useParams()
 
-    const [likesCount, setLikesCount] = useState(0);
+
 
     const handleLikeClick = async (id) => {
         try {
@@ -49,6 +52,31 @@ const SurveyDetails = () => {
             // setIsLikeButtonEnabled(false);
         }
     };
+    // const handleDisLike = async (id) => {
+    //     try {
+
+    //         setLikesCount((prevLikesCount) => prevLikesCount + 1);
+
+    //         // Send the PATCH request to update likes count
+    //         const res = await axiosPublic.patch(`/api/v1/survey/like/${id}`, {
+    //             userId: user?.userId,
+    //             userName: user?.displayName,
+    //             userEmail: user?.email,
+    //             // Note: sending the updated state value directly
+    //             likesCount: likesCount + 1,
+    //         });
+
+    //         // Log the response data
+    //         console.log(res.data);
+    //     } catch (error) {
+    //         // Revert the local state on error to maintain consistency with the server
+    //         setLikesCount((prevLikesCount) => prevLikesCount - 1);
+    //         console.error(error);
+    //     } finally {
+    //         // Enable the like button again, whether the request succeeds or fails
+    //         // setIsLikeButtonEnabled(false);
+    //     }
+    // };
     // console.log(comments)
     const handleCreateSurvey = async (event) => {
         event.preventDefault();
@@ -71,7 +99,7 @@ const SurveyDetails = () => {
         const createSurvey = {
             name: user?.displayName,
             photo: user?.photoURL,
-            email: user?.email,
+            userEmail: user?.email,
             description: form.description.value,
             surveyEmail: item.email,
             category: item.category,
@@ -100,7 +128,8 @@ const SurveyDetails = () => {
                     <div className='flex-col space-y-2   rounded-md'>
                         <h2 className="text-xl font-semibold "><span className='mr-2 text-black border-b-2 border-red-500 font-bold text-xl'>Category:</span>
                             {item?.category}</h2>
-                        <p className='text-sm'><span className='mr-2 text-black border-b-2  border-red-500 font-bold text-xl'>Description:</span> {item?.description}</p>
+                        <p className='text-sm'><span className='mr-2 text-black border-b-2  border-red-500 font-bold text-xl'>Description:</span> {
+                            item?.description}</p>
 
                         <h2 className="text-xl"><span className='mr-2 text-black border-b-2 border-red-500 font-bold text-xl'>Title:</span> {item?.surveyTitle}</h2>
 
@@ -115,10 +144,10 @@ const SurveyDetails = () => {
                             <p>{item?.likesCount}</p>
                         </button>
 
-                        <div className="flex items-center">
+                        <button className="flex items-center">
                             <AiFillDislike className='text-black'></AiFillDislike >
                             <p>{item?.disLike}</p>
-                        </div>
+                        </button>
                     </div>
 
 

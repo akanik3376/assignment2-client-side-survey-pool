@@ -29,10 +29,10 @@ const useAxiosSecure = () => {
 
         return response;
     }, async (error) => {
-        // if (error) {
-        //     await logoutUser()
-        //     navigate('/login')
-        // }
+        if (error) {
+            await logoutUser()
+            navigate('/login')
+        }
 
         const status = error.response.status //get status code in a variable
 

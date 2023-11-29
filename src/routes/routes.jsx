@@ -20,6 +20,7 @@ import PrivetRoot from './PrivetRoot';
 import Payments from '../pages/DashBoard/Payments/Payments';
 import FeetBack from '../pages/DashBoard/FeetBack';
 import AdminFedBack from '../pages/DashBoard/AdminFedBack/AdminFedBack';
+import Admin from '../pages/DashBoard/Admin';
 
 
 const routes = createBrowserRouter([
@@ -38,7 +39,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: '/survey/details/:id',
-                element: <SurveyDetails />,
+                element: <PrivetRoot> <SurveyDetails /></PrivetRoot>,
                 loader: ({ params }) => fetch(`http://localhost:5000/api/v1/survey/${params.id}`)
             },
 
@@ -56,7 +57,7 @@ const routes = createBrowserRouter([
             // },
             {
                 path: '/get-pro',
-                element: <GetPro />
+                element: <PrivetRoot><GetPro /></PrivetRoot>
             }
         ]
     },
@@ -82,6 +83,10 @@ const routes = createBrowserRouter([
             {
                 path: 'admin-home',
                 element: <AdminHome />
+            },
+            {
+                path: 'admin',
+                element: <Admin />
             },
             {
                 path: 'payments',

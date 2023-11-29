@@ -1,4 +1,3 @@
-import React from 'react';
 import Container from '../Share/Container';
 import Banner from '../components/home/Banner';
 import HowItWorks from '../components/home/HowItWorks';
