@@ -16,7 +16,7 @@ const Testimonials = () => {
     const [testimonials, setTestimonials] = useState()
 
     useEffect(() => {
-        fetch('http://localhost:5000/testimonial')
+        fetch('https://polling-survey-server.vercel.app/testimonial')
             .then(res => res.json())
             .then(data => setTestimonials(data))
     }, [])

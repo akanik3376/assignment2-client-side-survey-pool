@@ -26,7 +26,7 @@ const Navbar = () => {
 
 
         <Container>
-            <div className={`navbar bg-black  z-20 max-w-[1081px] mx-auto bg-opacity-40 text-white `}>
+            <div className={`navbar bg-black  z-20  mx-auto bg-opacity-40 text-white `}>
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">

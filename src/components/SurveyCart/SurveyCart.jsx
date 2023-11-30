@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const SurveyCart = ({ item }) => {
     // console.log(item)
     const { _id, category, surveyTitle, likesCount, disLike } = item || {}
-    // console.log(item)
+    console.log(item)
     return (
 
 

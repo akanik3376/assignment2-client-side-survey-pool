@@ -8,7 +8,8 @@ const useSurvey = () => {
     const { data: survey = [], isPending: loading, refetch } = useQuery({
         queryKey: ['survey',],
         queryFn: async () => {
-            const res = await axiosPublic.get('http://localhost:5000/api/v1/survey')
+            const res = await axiosPublic.get('https://polling-survey-server.vercel.app/api/v1/survey')
+            console.log(res.data)
             return res.data
         }
     })

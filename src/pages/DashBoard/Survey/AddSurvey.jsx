@@ -1,22 +1,13 @@
-import useAuth from "../../../Hooks/useAuth";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
-import useUser from "../../../Hooks/useUser";
+import useAuth from "../../../Hooks/useAuth";
+
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 
 const CreateSurvey = () => {
-    const axiosPublic = useAxiosPublic()
+    const axiosSecure = useAxiosSecure()
     const { user } = useAuth()
-    const [users] = useUser()
-    console.log(users)
-    let singleUser
-    users?.forEach(item => {
-        if (item?.email === user?.email) {
-            singleUser = item
-        }
 
-        // console.log(singleUser)
-    });
 
     const handleCreateSurvey = async (event) => {
         event.preventDefault();
@@ -24,7 +15,7 @@ const CreateSurvey = () => {
         const form = event.target;
 
         const createSurvey = {
-            surveyorEmail: singleUser?.email,
+            surveyorEmail: user?.email,
             surveyTitle: form.surveyTitle.value,
             category: form.category.value,
             date: form.date.value,
@@ -35,19 +26,15 @@ const CreateSurvey = () => {
             disLike: parseInt(form.disLike.value),
             time: new Date().toLocaleTimeString(),
         };
+        console.log(form.category.value,)
+        const res = await axiosSecure.post("/api/v1/survey", createSurvey)
+        console.log();
+        if (res?.data?.insertedId) {
 
-
-        if (singleUser.role == 'surveyor') {
-            const res = await axiosPublic.post("/api/v1/survey", createSurvey)
-            console.log(res.data);
             if (res.data.insertedId) {
                 Swal.fire('Survey successfully created!')
             }
         }
-        else {
-            Swal.fire('You are not a surveyor!')
-        }
-
 
     };
 
@@ -68,7 +55,7 @@ const CreateSurvey = () => {
                                     type="text"
                                     name="email"
                                     placeholder="Email" readOnly
-                                    defaultValue={singleUser?.email}
+                                    defaultValue={user?.email}
                                 />
                             </div>
                             <div className="flex-1">

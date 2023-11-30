@@ -21,6 +21,7 @@ import Payments from '../pages/DashBoard/Payments/Payments';
 import FeetBack from '../pages/DashBoard/FeetBack';
 import AdminFedBack from '../pages/DashBoard/AdminFedBack/AdminFedBack';
 import Admin from '../pages/DashBoard/Admin';
+import Tables from '../pages/DashBoard/Tables';
 
 
 const routes = createBrowserRouter([
@@ -35,12 +36,12 @@ const routes = createBrowserRouter([
             },
             {
                 path: '/survey',
-                element: <PrivetRoot><Survey /></PrivetRoot>
+                element: <Survey />
             },
             {
                 path: '/survey/details/:id',
                 element: <PrivetRoot> <SurveyDetails /></PrivetRoot>,
-                loader: ({ params }) => fetch(`http://localhost:5000/api/v1/survey/${params.id}`)
+                loader: ({ params }) => fetch(`https://polling-survey-server.vercel.app/api/v1/survey/${params.id}`)
             },
 
             {
@@ -114,6 +115,10 @@ const routes = createBrowserRouter([
                 path: 'admin-fed-back',
                 element: <AdminFedBack />
             },
+            {
+                path: ' responses',
+                element: <Tables />
+            },
 
 
 
@@ -122,7 +127,7 @@ const routes = createBrowserRouter([
     {
         path: '/update/:id',
         element: <Update />,
-        loader: ({ params }) => fetch(`http://localhost:5000/api/v1/survey/${params.id}`)
+        loader: ({ params }) => fetch(`https://polling-survey-server.vercel.app/api/v1/survey/${params.id}`)
     },
 
 ])

@@ -22,12 +22,12 @@ const StartSurvey = () => {
         const surveyQNA = {
             question1,
             answer1,
-
+            time: new Date().toLocaleTimeString(),
             name: user?.displayName,
             email: user.email
 
         }
-        console.log(surveyQNA)
+
         const res = await axiosPublic.post('/user-vote', surveyQNA)
         if (res.data.insertedId) {
             swal('Your answer has been saved')

@@ -1,24 +1,12 @@
-# React Basic Starter: Made by <a href="https://ismailjosim.netlify.app/">MD. JASIM</a>
+## Projects fetcher
+## My website is user friendly for smart phone tablet and computer users
 
-### Packages includes
+* The navigation menu prominently displayed and easy to use, clearly labeling sections and * pages.
 
-* React With Vite
-* React Router DOM
-* Tailwind CSS
-* DaisyUI
+* Easy to Navigate one page TO another page .
 
-### Starter Have
+* The project is Unique
 
-* Basic Files and Folder Structure
-* Setup Routes With React Router DOM
-* Configure Tailwind CSS
-* Configure DaisyUI
-* Setup Themes
+* This project is based on react, firebas, mongoDB, and tailwind
 
-*** You can use this for any of your React Projects. Don't need to change any folders. Just remove that folder or files you don't need in your project.
-
-## Folder Structure Layout
-
-<img src="https://i.ibb.co/C0zDC3J/React-application-folder-structure-layout.png"/>
-
-<h3 style="text-align: center;">⭐⭐⭐ If you like it give star and share it with others ⭐⭐⭐</h3>
+## Website link:

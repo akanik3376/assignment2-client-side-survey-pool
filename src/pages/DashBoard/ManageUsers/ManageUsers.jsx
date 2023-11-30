@@ -40,7 +40,7 @@ const ManageUsers = () => {
     }
 
     // make admin user
-    const HandelMakeAdmin = user => {
+    const HandelMakeAdmin = (id) => {
         Swal.fire({
             title: 'Are you sure?',
             icon: 'warning',
@@ -50,7 +50,7 @@ const ManageUsers = () => {
             confirmButtonText: 'Yes !'
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.patch(`/users/admin/${user._id}`)
+                axiosSecure.patch(`/users/admin/${id}`)
                     .then(res => {
                         if (res.data.modifiedCount > 0) {
                             refetch()
@@ -92,8 +92,8 @@ const ManageUsers = () => {
 
 
     //delete user
-    const HandelDeleteUser = row => {
-        console.log(row)
+    const HandelDeleteUser = (row) => {
+        // console.log(row)
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
