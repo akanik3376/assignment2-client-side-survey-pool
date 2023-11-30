@@ -8,6 +8,7 @@ import img from './../../../assets/images/modern-technology-concept_23-214750514
 const AdminHome = () => {
 
     const [survey, refetch] = useSurvey()
+
     const axiosPublic = useAxiosPublic()
     const feedback = 'This survey is not to good, You need to approve more'
 
@@ -111,7 +112,7 @@ const AdminHome = () => {
 
                                     <td>
 
-                                        <button onClick={() => HandelApprove(user._id)}
+                                        <button onClick={() => HandelApprove(user._id, user)}
                                             className={`${user.status == 'Publish' ? 'btn ' : "btn bg-green-500"}`}>Publish</button>
 
                                     </td>
