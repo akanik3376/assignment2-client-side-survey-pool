@@ -12,7 +12,7 @@ const HowItWorks = () => {
             return res.data
         }
     });
-    console.log(recentSurvey);
+    // console.log(recentSurvey);
 
     return (
         <div className="my-10" >
@@ -22,7 +22,8 @@ const HowItWorks = () => {
             </h2>
 
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5' >
-                {recentSurvey.map((item) => <RecentSurveyCard key={item._id} item={item}></RecentSurveyCard>)}
+                {recentSurvey.map((item) => item?.status === 'Publish' && <RecentSurveyCard key={item._id} item={item}></RecentSurveyCard>
+                )}
             </div>
 
 
