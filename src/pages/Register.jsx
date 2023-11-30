@@ -83,7 +83,7 @@ const Register = () => {
                                 </div>
                                 <div>
                                     <label htmlFor='email' className='block mb-2 text-sm'>
-                                        Name
+                                        PhotoURL
                                     </label>
                                     <input
                                         type='text'

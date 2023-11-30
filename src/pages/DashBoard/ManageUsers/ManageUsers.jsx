@@ -65,7 +65,7 @@ const ManageUsers = () => {
         })
     }
     // make admin user
-    const HandelMakeSavior = user => {
+    const HandelMakeSavior = (id) => {
         Swal.fire({
             title: 'Are you sure?',
             icon: 'warning',
@@ -75,7 +75,7 @@ const ManageUsers = () => {
             confirmButtonText: 'Yes !'
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.patch(`/users/surveyor/${user._id}`)
+                axiosSecure.patch(`/users/surveyor/${id}`)
                     .then(res => {
                         if (res.data.modifiedCount > 0) {
                             refetch()
