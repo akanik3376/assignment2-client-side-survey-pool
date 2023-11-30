@@ -116,7 +116,7 @@ const routes = createBrowserRouter([
                 element: <AdminFedBack />
             },
             {
-                path: ' responses',
+                path: 'responses',
                 element: <Tables />
             },
 

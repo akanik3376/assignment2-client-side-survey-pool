@@ -68,7 +68,7 @@ const Dashboard = () => {
                                     <NavLink to='admin-fed-back '><IoNotifications />unpublished responses</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to='responses'><IoNotifications /> responses</NavLink>
+                                    <NavLink to='/dashboard/responses'><IoNotifications /> responses</NavLink>
                                 </li>
                             </>
                         </>
